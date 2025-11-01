@@ -1,0 +1,80 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="style.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <link href="https://cdn.jsdelivr.net/npm/@flaticon/flaticon-uicons@3.3.1/css/all/all.min.css" rel="stylesheet">
+  <link rel="icon" type="image/png" href="img/CardWarsLogo.png">
+  <title>CardWars - Guide</title>
+</head>
+<body>
+  <header class="w-full h-24 flex justify-around items-center fixed bg-black px-8"> 
+    <div>
+      <a href="index.html" class="no-underline">
+        <img src="img/CardWarsLogo.png" alt="CardWars Logo" class="h-24 ml-4">
+      </a>
+    </div>
+    <nav class="hidden md:block">
+      <ul class="flex items-center mr-8 text-white text-lg font-semibold gap-8">
+        <li>
+          <a href="Guide.html" class="">Guide</a>
+        </li>
+        <li>
+          <a href="Market.html" class="">Market</a>
+        </li>
+        <li>
+          <a href="Arena.html" class="gold text-3xl font-bold">Play Now</a>
+        </li>
+        <li>
+          <a href="Collection.html" class="">Collection</a>
+        </li>
+        <li>
+          <a href="Favourite.html" class="">Favourite</a>
+        </li>
+      </ul>
+    </nav>
+    <div class="hidden md:block">
+      <a href="Cart.html" class="gold text-2xl ">
+        <i class="fi fi-rs-shopping-cart"></i>
+      </a>
+    </div>
+  </header>
+  <nav class="fixed bottom-0 w-full h-20 bg-black flex justify-around items-center md:hidden">
+    <ul class="w-full flex items-center justify-evenly text-white text-lg font-semibold gap-8">
+      <li>
+        <a href="Guide.html" class="flex flex-col items-center">
+          <i class="fi fi-rs-book"></i>
+          <p class="text-xs">Guide</p>
+        </a>
+      </li>
+      <li>
+        <a href="Market.html" class="flex flex-col items-center">
+          <i class="fi fi-rs-shopping-bag"></i>
+          <p class="text-xs">Market</p>
+        </a>
+      </li>
+      <li>
+        <a href="Arena.html" class="gold flex flex-col items-center">
+          <i class="fi fi-rs-play-alt"></i>
+          <p class="text-xs">Play Now</p>
+        </a>
+      </li>
+      <li>
+        <a href="Collection.html" class="flex flex-col items-center">
+          <i class="fi fi-rs-folder"></i>
+          <p class="text-xs">Collection</p>
+        </a>
+      </li>
+      <li>
+        <a href="Favourite.html" class="flex flex-col items-center">
+          <i class="fi fi-rs-heart"></i>
+          <p class="text-xs">Favourite</p>
+        </a>
+      </li>
+    </ul>
+  </nav>
+   <script type="text/javascript" src="app.js"></script>
+</body>
+</html>
