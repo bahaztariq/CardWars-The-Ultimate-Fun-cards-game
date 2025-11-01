@@ -9,3 +9,4 @@ body {
     color: #333;
     line-height: 1.6;
 }
+.gold{ background: radial-gradient(circle,rgba(255, 255, 0, 1) 0%, rgba(253, 187, 45, 1) 100%); color: transparent; background-clip: text; }
