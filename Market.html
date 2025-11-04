@@ -78,11 +78,12 @@
   <section class="Card-detailles hidden fixed w-3/4 h-128 top-1/2 left-1/2 text-center bg-gray-200 rounded-2xl"></section>
 
 <section class="w-full bg-white flex">
-<aside class="hidden flex flex-col gap-4 w-1/5 h-screen px-6 py-8 lg:block">
-<h2 class="text-2xl font-bold text-black">Filters</h2>
-<button class="reset w-full p-2 rounded-2xl bag-gold text-black text-2xl cursor-pointer mb-6 hover:scale-105 transition-all duration-500 ">reset filters</button>
+<aside class="hidden flex flex-col gap-4 w-1/5 px-6 py-8 lg:block">
+<h2 class="text-2xl font-bold text-black mb-2">Filters</h2>
+<button class="reset w-full p-2 rounded-2xl bag-gold text-black text-xl cursor-pointer mb-2 hover:scale-105 transition-all duration-500 ">Reset filters</button>
+<button class="Apply-filter w-full p-2 rounded-2xl bg-black text-amber-300 text-xl cursor-pointer mb-6 hover:scale-105 transition-all duration-500 ">Apply filters</button>
 <hr>
-<h3 class="text-xl font-bold text-black">Rarity</h3>
+<h3 class="text-xl font-bold text-black mb-2">Rarity</h3>
 <div class="rarity flex flex-col items-baseline">
 <div>
 <input type="checkbox" id="Commun" name="Rarity" value="Commun">
@@ -106,7 +107,7 @@
 </div>
 </div>
 <hr>
-<h3 class="text-xl font-bold text-black">Element</h3>
+<h3 class="text-xl font-bold text-black mb-2">Element</h3>
 <div class="Elements flex flex-col items-baseline">
 <div>
 <input type="checkbox" id="Fire" name="Element" value="Fire">
@@ -153,14 +154,100 @@
 </div>
 </div>
 <div class="Market-cards grid grid-cols-2 mt-4 gap-4 md:grid-cols-3 lg:grid-cols-4">
-<div class="Card w-64 h-96 bg-gray-200 rounded-lg flex-shrink-0 mx-2"></div>
-<div class="Card w-64 h-96 bg-gray-200 rounded-lg flex-shrink-0 mx-2"></div>
-<div class="Card w-64 h-96 bg-gray-200 rounded-lg flex-shrink-0 mx-2"></div>
-<div class="Card w-64 h-96 bg-gray-200 rounded-lg flex-shrink-0 mx-2"></div>
-<div class="Card w-64 h-96 bg-gray-200 rounded-lg flex-shrink-0 mx-2"></div>
-<div class="Card w-64 h-96 bg-gray-200 rounded-lg flex-shrink-0 mx-2"></div>
-<div class="Card w-64 h-96 bg-gray-200 rounded-lg flex-shrink-0 mx-2"></div>
-<div class="Card w-64 h-96 bg-gray-200 rounded-lg flex-shrink-0 mx-2"></div>
+      <div class="Card relative w-64 h-96 bg-gray-200 rounded-lg flex-shrink-0 mx-2 flex flex-col justify-end items-center gap-4 border-6 border-amber-300 bg-[url('Monsters-img/dragon.png')] bg-center bg-cover p-2 shadow-md">
+          <h3 class="text-white font-bold text-3xl">Dragon</h3>
+          <div class="card-description w-full h-1/3 bg-gray-200 opacity-90 border-2 border-amber-300 justify-around rounded-2xl"></div>
+          <div class="absolute top-0 right-0 w-1/3 h-6 bg-black flex justify-center items-center">
+            <p class="text-white">HP150</p>
+          </div>
+          <img src="Element-img/Dark.png" alt="Element" class="absolute top-2 left-2 w-8 h-8">
+      </div>
+      <div class="Card relative w-64 h-96 bg-gray-200 rounded-lg flex-shrink-0 mx-2 flex flex-col justify-end items-center gap-4 border-6 border-amber-300 bg-[url('Monsters-img/dragon.png')] bg-center bg-cover p-2 shadow-md">
+          <h3 class="text-white font-bold text-3xl">Dragon</h3>
+          <div class="card-description w-full h-1/3 bg-gray-200 opacity-90 border-2 border-amber-300 justify-around rounded-2xl"></div>
+          <div class="absolute top-0 right-0 w-1/3 h-6 bg-black flex justify-center items-center">
+            <p class="text-white">HP150</p>
+          </div>
+          <img src="Element-img/Dark.png" alt="Element" class="absolute top-2 left-2 w-8 h-8">
+      </div>
+      <div class="Card relative w-64 h-96 bg-gray-200 rounded-lg flex-shrink-0 mx-2 flex flex-col justify-end items-center gap-4 border-6 border-amber-300 bg-[url('Monsters-img/dragon.png')] bg-center bg-cover p-2 shadow-md">
+          <h3 class="text-white font-bold text-3xl">Dragon</h3>
+          <div class="card-description w-full h-1/3 bg-gray-200 opacity-90 border-2 border-amber-300 justify-around rounded-2xl"></div>
+          <div class="absolute top-0 right-0 w-1/3 h-6 bg-black flex justify-center items-center">
+            <p class="text-white">HP150</p>
+          </div>
+          <img src="Element-img/Dark.png" alt="Element" class="absolute top-2 left-2 w-8 h-8">
+      </div>
+      <div class="Card relative w-64 h-96 bg-gray-200 rounded-lg flex-shrink-0 mx-2 flex flex-col justify-end items-center gap-4 border-6 border-amber-300 bg-[url('Monsters-img/dragon.png')] bg-center bg-cover p-2 shadow-md">
+          <h3 class="text-white font-bold text-3xl">Dragon</h3>
+          <div class="card-description w-full h-1/3 bg-gray-200 opacity-90 border-2 border-amber-300 justify-around rounded-2xl"></div>
+          <div class="absolute top-0 right-0 w-1/3 h-6 bg-black flex justify-center items-center">
+            <p class="text-white">HP150</p>
+          </div>
+          <img src="Element-img/Dark.png" alt="Element" class="absolute top-2 left-2 w-8 h-8">
+      </div>
+      <div class="Card relative w-64 h-96 bg-gray-200 rounded-lg flex-shrink-0 mx-2 flex flex-col justify-end items-center gap-4 border-6 border-amber-300 bg-[url('Monsters-img/dragon.png')] bg-center bg-cover p-2 shadow-md">
+          <h3 class="text-white font-bold text-3xl">Dragon</h3>
+          <div class="card-description w-full h-1/3 bg-gray-200 opacity-90 border-2 border-amber-300 justify-around rounded-2xl"></div>
+          <div class="absolute top-0 right-0 w-1/3 h-6 bg-black flex justify-center items-center">
+            <p class="text-white">HP150</p>
+          </div>
+          <img src="Element-img/Dark.png" alt="Element" class="absolute top-2 left-2 w-8 h-8">
+      </div>
+      <div class="Card relative w-64 h-96 bg-gray-200 rounded-lg flex-shrink-0 mx-2 flex flex-col justify-end items-center gap-4 border-6 border-amber-300 bg-[url('Monsters-img/dragon.png')] bg-center bg-cover p-2 shadow-md">
+          <h3 class="text-white font-bold text-3xl">Dragon</h3>
+          <div class="card-description w-full h-1/3 bg-gray-200 opacity-90 border-2 border-amber-300 justify-around rounded-2xl"></div>
+          <div class="absolute top-0 right-0 w-1/3 h-6 bg-black flex justify-center items-center">
+            <p class="text-white">HP150</p>
+          </div>
+          <img src="Element-img/Dark.png" alt="Element" class="absolute top-2 left-2 w-8 h-8">
+      </div>
+      <div class="Card relative w-64 h-96 bg-gray-200 rounded-lg flex-shrink-0 mx-2 flex flex-col justify-end items-center gap-4 border-6 border-amber-300 bg-[url('Monsters-img/dragon.png')] bg-center bg-cover p-2 shadow-md">
+          <h3 class="text-white font-bold text-3xl">Dragon</h3>
+          <div class="card-description w-full h-1/3 bg-gray-200 opacity-90 border-2 border-amber-300 justify-around rounded-2xl"></div>
+          <div class="absolute top-0 right-0 w-1/3 h-6 bg-black flex justify-center items-center">
+            <p class="text-white">HP150</p>
+          </div>
+          <img src="Element-img/Dark.png" alt="Element" class="absolute top-2 left-2 w-8 h-8">
+      </div>
+      <div class="Card relative w-64 h-96 bg-gray-200 rounded-lg flex-shrink-0 mx-2 flex flex-col justify-end items-center gap-4 border-6 border-amber-300 bg-[url('Monsters-img/dragon.png')] bg-center bg-cover p-2 shadow-md">
+          <h3 class="text-white font-bold text-3xl">Dragon</h3>
+          <div class="card-description w-full h-1/3 bg-gray-200 opacity-90 border-2 border-amber-300 justify-around rounded-2xl"></div>
+          <div class="absolute top-0 right-0 w-1/3 h-6 bg-black flex justify-center items-center">
+            <p class="text-white">HP150</p>
+          </div>
+          <img src="Element-img/Dark.png" alt="Element" class="absolute top-2 left-2 w-8 h-8">
+      </div><div class="Card relative w-64 h-96 bg-gray-200 rounded-lg flex-shrink-0 mx-2 flex flex-col justify-end items-center gap-4 border-6 border-amber-300 bg-[url('Monsters-img/dragon.png')] bg-center bg-cover p-2 shadow-md">
+          <h3 class="text-white font-bold text-3xl">Dragon</h3>
+          <div class="card-description w-full h-1/3 bg-gray-200 opacity-90 border-2 border-amber-300 justify-around rounded-2xl"></div>
+          <div class="absolute top-0 right-0 w-1/3 h-6 bg-black flex justify-center items-center">
+            <p class="text-white">HP150</p>
+          </div>
+          <img src="Element-img/Dark.png" alt="Element" class="absolute top-2 left-2 w-8 h-8">
+      </div><div class="Card relative w-64 h-96 bg-gray-200 rounded-lg flex-shrink-0 mx-2 flex flex-col justify-end items-center gap-4 border-6 border-amber-300 bg-[url('Monsters-img/dragon.png')] bg-center bg-cover p-2 shadow-md">
+          <h3 class="text-white font-bold text-3xl">Dragon</h3>
+          <div class="card-description w-full h-1/3 bg-gray-200 opacity-90 border-2 border-amber-300 justify-around rounded-2xl"></div>
+          <div class="absolute top-0 right-0 w-1/3 h-6 bg-black flex justify-center items-center">
+            <p class="text-white">HP150</p>
+          </div>
+          <img src="Element-img/Dark.png" alt="Element" class="absolute top-2 left-2 w-8 h-8">
+      </div><div class="Card relative w-64 h-96 bg-gray-200 rounded-lg flex-shrink-0 mx-2 flex flex-col justify-end items-center gap-4 border-6 border-amber-300 bg-[url('Monsters-img/dragon.png')] bg-center bg-cover p-2 shadow-md">
+          <h3 class="text-white font-bold text-3xl">Dragon</h3>
+          <div class="card-description w-full h-1/3 bg-gray-200 opacity-90 border-2 border-amber-300 justify-around rounded-2xl"></div>
+          <div class="absolute top-0 right-0 w-1/3 h-6 bg-black flex justify-center items-center">
+            <p class="text-white">HP150</p>
+          </div>
+          <img src="Element-img/Dark.png" alt="Element" class="absolute top-2 left-2 w-8 h-8">
+      </div>
+      <div class="Card relative w-64 h-96 bg-gray-200 rounded-lg flex-shrink-0 mx-2 flex flex-col justify-end items-center gap-4 border-6 border-amber-300 bg-[url('Monsters-img/dragon.png')] bg-center bg-cover p-2 shadow-md">
+          <h3 class="text-white font-bold text-3xl">Dragon</h3>
+          <div class="card-description w-full h-1/3 bg-gray-200 opacity-90 border-2 border-amber-300 justify-around rounded-2xl"></div>
+          <div class="absolute top-0 right-0 w-1/3 h-6 bg-black flex justify-center items-center">
+            <p class="text-white">HP150</p>
+          </div>
+          <img src="Element-img/Dark.png" alt="Element" class="absolute top-2 left-2 w-8 h-8">
+      </div>
+    
 </div>
 </section>
 </section>
