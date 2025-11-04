@@ -106,7 +106,7 @@ function displayCards(monstersArray) {
   MarketContainer.innerHTML = '';
   
   if (monstersArray.length === 0) {
-    MarketContainer.innerHTML = '<p class="text-white text-xl">No monsters found matching your filters.</p>';
+    MarketContainer.innerHTML = '<p class="text-black text-xl">No monsters found matching your filters.</p>';
     return;
   }
   
@@ -124,17 +124,14 @@ function CreateCard(cardObject) {
   Card.innerHTML = `
     <h3 class="text-white font-bold text-3xl">${cardObject.name}</h3>
     <div class="card-description w-full h-1/3 bg-gray-200 opacity-90 border-2 border-amber-300 p-2 rounded-2xl">
-      <p class="text-sm"><strong>Element:</strong> ${cardObject.element}</p>
-      <p class="text-sm"><strong>Price:</strong> $${cardObject.price}</p>
-      <p class="text-sm"><strong>Quantity:</strong> ${cardObject.quantity}</p>
+      <p class="text-sm"><strong>Power:</strong> ${cardObject.Power}</p>
+      <p class="text-sm"><strong>Price:</strong> $${cardObject.Defence}</p>
+      <p class="text-sm"><strong>Quantity:</strong> ${cardObject.Speed}</p>
     </div>
     <div class="absolute top-0 right-0 w-1/3 h-6 bg-black flex justify-center items-center">
       <p class="text-white">HP${cardObject.hp}</p>
     </div>
-    <div class="absolute top-0 left-0 px-2 h-6 bg-${cardObject.rarity.toLowerCase()}-600 flex justify-center items-center rounded-br-lg">
-      <p class="text-white text-xs font-bold">${cardObject.rarity}</p>
-    </div>
+	<img src="Element-img/${cardObject.element}.png" alt="Element" class="absolute top-2 left-2 w-8 h-8"></img>
   `;
-  
   MarketContainer.appendChild(Card);
 }
