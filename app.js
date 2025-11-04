@@ -125,8 +125,8 @@ function CreateCard(cardObject) {
     <h3 class="text-white font-bold text-3xl">${cardObject.name}</h3>
     <div class="card-description w-full h-1/3 bg-gray-200 opacity-90 border-2 border-amber-300 p-2 rounded-2xl">
       <p class="text-sm"><strong>Power:</strong> ${cardObject.Power}</p>
-      <p class="text-sm"><strong>Price:</strong> $${cardObject.Defence}</p>
-      <p class="text-sm"><strong>Quantity:</strong> ${cardObject.Speed}</p>
+      <p class="text-sm"><strong>Defence:</strong> ${cardObject.Defence}</p>
+      <p class="text-sm"><strong>Speed:</strong> ${cardObject.Speed}</p>
     </div>
     <div class="absolute top-0 right-0 w-1/3 h-6 bg-black flex justify-center items-center">
       <p class="text-white">HP${cardObject.hp}</p>

@@ -1,0 +1,15 @@
+[
+  {
+    "id": 1,
+    "name": "Dragon",
+    "rarity": "Legendary",
+    "element": "Dark",
+    "hp": 150,
+    "Power": 75,
+    "Defence": 75,
+    "Speed": 75,
+    "price": 500,
+    "quantity": 5,
+    "image": "dragon.png"
+  }
+]
