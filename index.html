@@ -41,7 +41,7 @@
       </a>
     </div>
   </header>
-  <nav class="fixed bottom-0 w-full h-20 bg-black flex justify-around items-center md:hidden">
+  <nav class="fixed bottom-0 w-full h-20 bg-black flex justify-between items-center px-4 md:hidden">
     <ul class="w-full flex items-center justify-evenly text-white text-lg font-semibold gap-8">
       <li>
         <a href="Guide.html" class="flex flex-col items-center">
@@ -80,7 +80,7 @@
     <p class="text-xl md:text-2xl text-black mb-8 font-bold drop-shadow-lg">Experience the thrill of strategic card battles!</p>
     <a href="Arena.html" class=" text-black font-bold py-4 px-8 rounded-lg text-xl bag-gold ">Play Now</a>
   </section>
-  <section>
+  <section class="w-full">
     <div class="w-full h-auto bg-white flex flex-col justify-center items-center py-16 px-8 gap-12 md:gap-24 md:flex-row md:justify-evenly">
       <div class="flex flex-col justify-center items-center text-center gap-4 md:w-1/3">
         <i class="fi fi-rr-shop text-6xl gold"></i>
@@ -127,8 +127,8 @@
     </div>
   </section>
   <section>
-    <div class="w-full h-auto bg-white flex flex-col justify-center items-center py-16 px-8 gap-12 md:gap-24 sm:grid sm:grid-cols-2 md:flex md:flex-row md:justify-evenly">
-      <div class="flex flex-col justify-center items-center shadow-md px-4 py-6 rounded-lg md:w-1/4">
+    <div class="w-full h-auto bg-white flex flex-col justify-center items-center py-16 px-8 gap-4 md:gap-24 sm:grid sm:grid-cols-2 md:flex md:flex-row md:justify-evenly">
+      <div class=" flex flex-col justify-center items-center shadow-md px-2 py-6 rounded-lg md:w-1/4 md:px-4">
         <i class="fi fi-rs-users-alt text-3xl gold"></i>
         <h3 class="text-2xl font-bold">+50000</h3>
         <p class="text-gray-600 ">active players</p>
@@ -150,15 +150,15 @@
         <p class="text-gray-600 ">cards traded</p>
       </div>
   </section>
-  <section class="w-full h-[40vh] flex justify-center items-center bg-white lg:h-[80vh]">
-     <div class="w-3/4 h-[80%] bg-[url('img/homebanner.png')] bg-center bg-cover bg-no-repeat rounded-2xl px-8 py-16 flex flex-col items-baseline justify-center gap-8 ">
-      <h2 class="text-4xl text-white font-bold">Explore New Worlds <br>with Your Costum Collection</h2>
+  <section class="w-full h-[40vh] flex justify-center items-center bg-white lg:h-[80vh] px-4">
+     <div class="w-full md:w-3/4 h-[80%] bg-[url('img/homebanner.png')] bg-center bg-cover bg-no-repeat rounded-2xl px-2 py-16 flex flex-col items-baseline justify-center gap-8 md:px-8">
+      <h2 class="text-xl text-white font-bold md:text-4xl">Explore New Worlds <br>with Your Costum Collection</h2>
       <div class="flex gap-4">
-        <button class="bag-gold p-4 rounded-2xl hover:scale-105 transition-all duration-500">
-          <a href="Market.html" class=" text-black text-xl">See all cards</a>
+        <button class="bag-gold p-2 rounded-2xl hover:scale-105 transition-all duration-500 md:p-4">
+          <a href="Market.html" class=" text-black text-sm md:text-xl">See all cards</a>
         </button>
-        <button class="p-4 rounded-2xl border-2 border-amber-300 hover:scale-105 transition-all duration-500">
-          <a href="Collection.html" class="gold text-xl">See collection</a>
+        <button class="p-2 rounded-2xl border-2 border-amber-300 hover:scale-105 transition-all duration-500 md:p-4">
+          <a href="Collection.html" class="gold text-sm md:text-xl">See collection</a>
         </button>
       </div>
      </div>
@@ -169,10 +169,10 @@
     <p class="text-white">Available now on all platforms!</p>
   </section>
   <footer class="flex flex-col w-full h-16 bg-black">
-    <div class="bag-gold w-full  flex  flex-col justify-center items-center px-24 py-6 gap-4 md:justify-between md:flex-row">
-      <h3 class="text-3xl font-bold text-black">Stay Connected</h3>
-      <ul class="flex gap-6 text-black text-2xl">
-        <li>
+        <div class="bag-gold w-full  flex  flex-col justify-center items-center px-8 py-6 gap-4 md:justify-between md:flex-row md:px-24">
+          <h3 class="text-3xl font-bold text-black">Stay Connected</h3>
+          <ul class="flex gap-6 text-black text-2xl">
+            <li>
               <a href="#" class="text-black"><i class="fi fi-brands-facebook"></i></a>
             </li>
             <li>
@@ -225,7 +225,7 @@
         <div class="w-full h-16 bg-black flex justify-center items-center pb-4">
           <p class="text-white text-sm">&copy; 2025 CardWars. All rights reserved.</p>
         </div>
-      </footer>
+   </footer>
    <script type="text/javascript" src="app.js"></script>
 </body>
 </html>
