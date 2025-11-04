@@ -41,7 +41,7 @@
       </a>
     </div>
   </header>
-  <nav class="fixed bottom-0 w-full h-20 bg-black flex justify-between items-center px-4 md:hidden">
+  <nav class="fixed bottom-0 w-full h-20 bg-black flex justify-between items-center px-4 md:hidden z-50">
     <ul class="w-full flex items-center justify-evenly text-white text-lg font-semibold gap-8">
       <li>
         <a href="Guide.html" class="flex flex-col items-center">
@@ -108,18 +108,24 @@
       </div>
   </section>
   <section class="w-full py-16 flex-col justify-center items-center">
-    <div class=" w-full flex px-24 justify-between items-center">
-      <h2 class="text-4xl font-bold text-center my-8">Featured Cards</h2>
+    <div class=" w-full flex px-4 justify-between items-center md:px-24">
+      <h2 class="text-2xl font-bold text-center my-8 md:text-4xl">Featured Cards</h2>
       <div>
-      <button class="bg-gold text-black font-bold py-2 px-4 rounded-l-lg">Prev</button>
-      <button class="bg-gold text-black font-bold py-2 px-4 rounded-r-lg">Next</button>
+      <button class="bag-gold text-black font-bold p-4 md:py-4 md:px-6 rounded-[100px] cursor-pointer active:scale-95"><</button>
+      <button class="bag-gold text-black font-bold  p-4 md:py-4 md:px-6 rounded-[100px] cursor-pointer active:scale-95">></button>
       </div>
     </div>
     <div class="Slider w-full flex justify-center items-center overflow-x-hidden py-4">
       <div class="Card w-64 h-96 bg-gray-200 rounded-lg flex-shrink-0 mx-2"></div>
       <div class="Card w-64 h-96 bg-gray-200 rounded-lg flex-shrink-0 mx-2"></div>
       <div class="Card w-64 h-96 bg-gray-200 rounded-lg flex-shrink-0 mx-2"></div>
-      <div class="Card w-64 h-96 bg-gray-200 rounded-lg flex-shrink-0 mx-2"></div>
+      <div class="Card relative w-64 h-96 bg-gray-200 rounded-lg flex-shrink-0 mx-2 flex flex-col justify-end items-center gap-4 border-6 border-amber-300 bg-[url('Monsters-img/dragon.png')] bg-center bg-cover p-2 shadow-md">
+          <h3 class="text-white font-bold text-3xl">Dragon</h3>
+          <div class="card-description w-full h-1/3 bg-gray-200 opacity-90 border-2 border-amber-300 justify-around rounded-2xl"></div>
+          <div class="absolute top-0 right-0 w-1/3 h-6 bg-black flex justify-center items-center">
+            <p class="text-white">HP150</p>
+          </div>
+      </div>
       <div class="Card w-64 h-96 bg-gray-200 rounded-lg flex-shrink-0 mx-2"></div>
       <div class="Card w-64 h-96 bg-gray-200 rounded-lg flex-shrink-0 mx-2"></div>
       <div class="Card w-64 h-96 bg-gray-200 rounded-lg flex-shrink-0 mx-2"></div>

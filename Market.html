@@ -130,17 +130,17 @@
 </div>
 </div>
 <hr>
-<div>
+<div class="flex flex-col">
 <label for="Price">Price</label>
-<input name="Price" type="range" min="0" max="10">
+<input name="Price" type="range" min="0" max="10" value="0">
 </div>
-<div>
+<div class="flex flex-col">
 <label for="Quantity">Quantity</label>
-<input name="Quantity" type="range" min="0" max="10">
+<input name="Quantity" type="range" min="0" max="10" value="0">
 </div>
-<div>
+<div class="flex flex-col">
 <label for="HP">HP</label>
-<input name="HP" type="range" min="0" max="10">
+<input name="HP" type="range" min="0" max="10" value="0">
 </div>
 </aside>
 <section class=" w-full p-4 flex flex-col items-center md:p-8 ">
@@ -148,9 +148,19 @@
 <h1 class="text-5xl text-black font-bold">Marketplace</h1>
 <h3 class="text-xl text-gray-600 md:text-2xl">buy and sell cards from other players</h3>
 <div class="flex gap-2 md:gap-4">
-<input class="Search w-full bg-gray-200 p-4 rounded-xl " type="text" placeholder="Search for a card">
-<button class="bg-black py-2 px-4 text-white rounded-xl cursor-pointer hover:scale-105 transition-all duration-500 md:py-4 md:px-8 ">Search</button>
+   <input class="Search w-full bg-gray-200 p-4 rounded-xl " type="text" placeholder="Search for a card">
+   <button class="bg-black py-2 px-4 text-white rounded-xl cursor-pointer hover:scale-105 transition-all duration-500 md:py-4 md:px-8 ">Search</button>
 </div>
+</div>
+<div class="Market-cards grid grid-cols-2 mt-4 gap-4 md:grid-cols-3 lg:grid-cols-4">
+<div class="Card w-64 h-96 bg-gray-200 rounded-lg flex-shrink-0 mx-2"></div>
+<div class="Card w-64 h-96 bg-gray-200 rounded-lg flex-shrink-0 mx-2"></div>
+<div class="Card w-64 h-96 bg-gray-200 rounded-lg flex-shrink-0 mx-2"></div>
+<div class="Card w-64 h-96 bg-gray-200 rounded-lg flex-shrink-0 mx-2"></div>
+<div class="Card w-64 h-96 bg-gray-200 rounded-lg flex-shrink-0 mx-2"></div>
+<div class="Card w-64 h-96 bg-gray-200 rounded-lg flex-shrink-0 mx-2"></div>
+<div class="Card w-64 h-96 bg-gray-200 rounded-lg flex-shrink-0 mx-2"></div>
+<div class="Card w-64 h-96 bg-gray-200 rounded-lg flex-shrink-0 mx-2"></div>
 </div>
 </section>
 </section>
