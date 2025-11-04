@@ -75,6 +75,85 @@
       </li>
     </ul>
   </nav>
+  <section class="Card-detailles hidden fixed w-3/4 h-128 top-1/2 left-1/2 text-center bg-gray-200 rounded-2xl"></section>
+
+<section class="w-full bg-white flex">
+<aside class="hidden flex flex-col gap-4 w-1/5 h-screen px-6 py-8 lg:block">
+<h2 class="text-2xl font-bold text-black">Filters</h2>
+<button class="reset w-full p-2 rounded-2xl bag-gold text-black text-2xl cursor-pointer mb-6 hover:scale-105 transition-all duration-500 ">reset filters</button>
+<hr>
+<h3 class="text-xl font-bold text-black">Rarity</h3>
+<div class="rarity flex flex-col items-baseline">
+<div>
+<input type="checkbox" id="Commun" name="Rarity" value="Commun">
+<label for="Commun">Commun</label>
+</div>
+<div>
+<input type="checkbox" id="rare" name="Rarity" value="rare">
+<label for="rare">Rare</label>
+</div>
+<div>
+<input type="checkbox" id="" name="Rarity" value="epic">
+<label for="epic">Epic</label>
+</div>
+<div>
+<input type="checkbox" id="" name="Rarity" value="legendary">
+<label for="legendary">Legendary</label>
+</div>
+<div>
+<input type="checkbox" id="" name="Rarity" value="mythic">
+<label for="mythic">Mythic</label>
+</div>
+</div>
+<hr>
+<h3 class="text-xl font-bold text-black">Element</h3>
+<div class="Elements flex flex-col items-baseline">
+<div>
+<input type="checkbox" id="Fire" name="Element" value="Fire">
+<label for="Fire">Fire</label>
+</div>
+<div>
+<input type="checkbox" id="Water" name="Element" value="Water">
+<label for="Water">Water</label>
+</div>
+<div>
+<input type="checkbox" id="Wind" name="Element" value="Wind">
+<label for="Wind">Wind</label>
+</div>
+<div>
+<input type="checkbox" id="earth" name="Element" value="Earth">
+<label for="Earth">Earth</label>
+</div>
+<div>
+<input type="checkbox" id="Nature" name="Element" value="Nature">
+<label for="Nature">Nature</label>
+</div>
+</div>
+<hr>
+<div>
+<label for="Price">Price</label>
+<input name="Price" type="range" min="0" max="10">
+</div>
+<div>
+<label for="Quantity">Quantity</label>
+<input name="Quantity" type="range" min="0" max="10">
+</div>
+<div>
+<label for="HP">HP</label>
+<input name="HP" type="range" min="0" max="10">
+</div>
+</aside>
+<section class=" w-full p-4 flex flex-col items-center md:p-8 ">
+<div class="w-full flex flex-col gap-4 ">
+<h1 class="text-5xl text-black font-bold">Marketplace</h1>
+<h3 class="text-xl text-gray-600 md:text-2xl">buy and sell cards from other players</h3>
+<div class="flex gap-2 md:gap-4">
+<input class="Search w-full bg-gray-200 p-4 rounded-xl " type="text" placeholder="Search for a card">
+<button class="bg-black py-2 px-4 text-white rounded-xl cursor-pointer hover:scale-105 transition-all duration-500 md:py-4 md:px-8 ">Search</button>
+</div>
+</div>
+</section>
+</section>
    <footer class="flex flex-col w-full h-16 bg-black">
         <div class="bag-gold w-full  flex  flex-col justify-center items-center px-8 py-6 gap-4 md:justify-between md:flex-row md:px-24">
           <h3 class="text-3xl font-bold text-black">Stay Connected</h3>
