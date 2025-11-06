@@ -196,7 +196,7 @@
   },
   {
     "id": 16,
-    "name": "Frost Wolf",
+    "name": "Frost Wolfs",
     "rarity": "Common",
     "element": "Water",
     "hp": 95,
@@ -205,13 +205,13 @@
     "Speed": 70,
     "price": 110,
     "quantity": 28,
-    "image": "frost_wolf.png"
+    "image": "frost_wolfs.png"
   },
   {
     "id": 17,
     "name": "Spark Lizard",
     "rarity": "Common",
-    "element": "Light",
+    "element": "Fire",
     "hp": 80,
     "Power": 60,
     "Defence": 35,
@@ -222,7 +222,7 @@
   },
   {
     "id": 18,
-    "name": "Forest Treant",
+    "name": "Forest Treants",
     "rarity": "Common",
     "element": "Earth",
     "hp": 105,
@@ -231,7 +231,7 @@
     "Speed": 50,
     "price": 115,
     "quantity": 25,
-    "image": "forest_treant.png"
+    "image": "forest_treants.png"
   },
   {
     "id": 19,
