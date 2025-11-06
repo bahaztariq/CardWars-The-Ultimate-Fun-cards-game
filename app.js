@@ -43,14 +43,12 @@ fetch('Monsters.json')
 .then(response => response.json())
 .then(data => {
     allMonsters = data;
-    // These functions are now safe to call because the guards are inside them
     displayCards(allMonsters); 
     showfavourites();
 })
 .catch(error => console.error('Error loading monsters:', error));
 
 // show faq answer
-// No guard needed, .forEach on an empty NodeList is safe.
 showButtons.forEach((button) => {
     button.addEventListener('click', () => {
         const answer = button.closest('.Questions').querySelector('.answer');
@@ -136,18 +134,16 @@ if (resetbtn) {
         elements.forEach((element) =>{
             element.checked = false;
         });
-        displayCards(allMonsters); // Safe, guard is inside
+        displayCards(allMonsters);
     });
 }
 
-// apply filters
-// ** ADDED GUARD **
-// Only add listener if the apply button exists on this page
+
 if (applyFilterBtn) {
     applyFilterBtn.addEventListener('click', () => {
         const filtered = filterMonsters();
-        displayCards(filtered); // Safe, guard is inside
-    });
+        displayCards(filtered);
+	});
 }
 
 // create a filtred liste
@@ -182,8 +178,6 @@ function filterMonsters() {
 
 // // display list
 function displayCards(monstersArray) {
-    // ** ADDED GUARD **
-    // If this container doesn't exist on the page, do nothing.
     if (!MarketContainer) return; 
 
     MarketContainer.innerHTML = '';
