@@ -82,7 +82,7 @@
 <section class="w-full bg-white flex">
 <aside class="hidden flex flex-col gap-4 w-1/5 px-6 py-8 lg:block">
 <h2 class="text-2xl font-bold text-black mb-2">Filters</h2>
-<button class="reset w-full p-2 rounded-2xl bag-gold text-black text-xl cursor-pointer mb-2 hover:scale-105 transition-all duration-500 ">Reset filters</button>
+<button id="reset" class="reset w-full p-2 rounded-2xl bag-gold text-black text-xl cursor-pointer mb-2 hover:scale-105 transition-all duration-500 ">Reset filters</button>
 <button class="Apply-filter w-full p-2 rounded-2xl bg-black text-amber-300 text-xl cursor-pointer mb-6 hover:scale-105 transition-all duration-500 ">Apply filters</button>
 <hr>
 <h3 class="text-xl font-bold text-black mb-2">Rarity</h3>
@@ -159,7 +159,7 @@
    <button class="bg-black py-2 px-4 text-white rounded-xl cursor-pointer hover:scale-105 transition-all duration-500 md:py-4 md:px-8 ">Search</button>
 </div>
 </div>
-<div class="Market-cards grid grid-cols-2 mt-4 gap-4 md:grid-cols-3 lg:grid-cols-4"></div>
+<div id="Market-cards" class="Market-cards grid grid-cols-2 mt-4 gap-4 md:grid-cols-3 lg:grid-cols-4"></div>
 </section>
 </section>
    <footer class="flex flex-col w-full h-16 bg-black">
