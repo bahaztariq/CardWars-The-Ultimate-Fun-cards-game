@@ -107,51 +107,124 @@
         </button>
       </div>
   </section>
-  <section class="w-full py-16 flex-col justify-center items-center">
-    <div class=" w-full flex px-4 justify-between items-center md:px-24">
-      <h2 class="text-2xl font-bold text-center my-8 md:text-4xl">Featured Cards</h2>
+  <section class="w-full py-16 flex-col justify-center items-center md:px-12 lg:px-24">
+    <div class=" w-full flex px-4 justify-between items-center">
+      <h2 class="text-2xl font-bold text-center my-8 md:text-4xl">Famous Cards</h2>
       <div>
-      <button class="bag-gold text-black font-bold p-4 md:py-4 md:px-6 rounded-[100px] cursor-pointer active:scale-95"><</button>
-      <button class="bag-gold text-black font-bold  p-4 md:py-4 md:px-6 rounded-[100px] cursor-pointer active:scale-95">></button>
+      <button id="prev-btn" class="bag-gold text-black font-bold p-4 md:py-4 md:px-6 rounded-[100px] cursor-pointer active:scale-95"><</button>
+      <button id="next-btn" class="bag-gold text-black font-bold  p-4 md:py-4 md:px-6 rounded-[100px] cursor-pointer active:scale-95">></button>
       </div>
     </div>
-    <div class="Slider w-full flex justify-center items-center overflow-x-scroll py-4">
-      <div class="Card w-64 h-96 bg-gray-200 rounded-lg flex-shrink-0 mx-2"></div>
-      <div class="Card w-64 h-96 bg-gray-200 rounded-lg flex-shrink-0 mx-2"></div>
-      <div class="Card w-64 h-96 bg-gray-200 rounded-lg flex-shrink-0 mx-2"></div>
-      <div class="Card relative w-64 h-96 bg-gray-200 rounded-lg flex-shrink-0 mx-2 flex flex-col justify-end items-center gap-4 border-6 border-amber-300 bg-[url('Monsters-img/dragon.png')] bg-center bg-cover p-2 shadow-md">
-          <h3 class="text-white font-bold text-3xl">Dragon</h3>
-          <div class="card-description w-full h-1/3 bg-gray-200 opacity-90 border-2 border-amber-300 justify-around rounded-2xl"></div>
-          <div class="absolute top-0 right-0 w-1/3 h-6 bg-black flex justify-center items-center">
-            <p class="text-white">HP150</p>
-          </div>
-          <img src="Element-img/Dark.png" alt="Element" class="absolute top-2 left-2 w-8 h-8">
+    <div id="slider-container" class="Slider w-full flex gap-4 overflow-x-scroll py-4 px-4">
+      <div class="Card relative w-36 h-48 md:w-48 md:h-72 lg:w-64 lg:h-96 bg-gray-200 flex-shrink-0 rounded-lg flex flex-col justify-end items-center gap-2 bg-center bg-cover p-2 shadow-md overflow-hidden sm:gap-3 md:gap-4" style="border: 5px solid #fbbf24; background-image: url('Monsters-img/dragon.png');">
+      <h3 class="text-white font-bold text-sm sm:text-2xl md:text-3xl drop-shadow-lg">Dragon</h3>
+      <div class="card-description flex justify-around items-center w-full min-h-1/3 bg-gray-200 opacity-90 border-2 border-amber-300 p-1 rounded-xl sm:p-2 sm:rounded-2xl">
+        <div class="flex flex-col justify-center items-center gap-1"><img src="img/Power.png" alt="Power" class="w-6 h-6 sm:w-8 sm:h-8"><p class="text-xs sm:text-sm">75</p></div>
+        <div class="flex flex-col justify-center items-center gap-1"><img src="img/Defence.png" alt="Defence" class="w-6 h-6 sm:w-8 sm:h-8"><p class="text-xs sm:text-sm">75</p></div>
+        <div class="flex flex-col justify-center items-center gap-1"><img src="img/Speed.png" alt="Speed" class="w-6 h-6 sm:w-8 sm:h-8"><p class="text-xs sm:text-sm">75</p></div>
       </div>
-      <div class="Card w-64 h-96 bg-gray-200 rounded-lg flex-shrink-0 mx-2"></div>
-      <div class="Card w-64 h-96 bg-gray-200 rounded-lg flex-shrink-0 mx-2"></div>
-      <div class="Card w-64 h-96 bg-gray-200 rounded-lg flex-shrink-0 mx-2"></div>
-      <div class="Card w-64 h-96 bg-gray-200 rounded-lg flex-shrink-0 mx-2"></div>
+      <div class="absolute top-0 right-0 w-1/3 h-5 bg-black flex justify-center items-center sm:h-6"><p class="text-white text-xs sm:text-sm">HP150</p></div>
+      <img src="Element-img/Fire.png" alt="Element" class="absolute top-2 left-2 w-6 h-6 sm:w-8 sm:h-8">
+    </div>
+
+    <div class="Card relative w-36 h-48 md:w-48 md:h-72 lg:w-64 lg:h-96 bg-gray-200 flex-shrink-0 rounded-lg flex flex-col justify-end items-center gap-2 bg-center bg-cover p-2 shadow-md overflow-hidden sm:gap-3 md:gap-4" style="border: 5px solid #fbbf24; background-image: url('Monsters-img/phoenix.png');">
+      <h3 class="text-white font-bold text-sm sm:text-2xl md:text-3xl drop-shadow-lg">Phoenix</h3>
+      <div class="card-description flex justify-around items-center w-full min-h-1/3 bg-gray-200 opacity-90 border-2 border-amber-300 p-1 rounded-xl sm:p-2 sm:rounded-2xl">
+        <div class="flex flex-col justify-center items-center gap-1"><img src="img/Power.png" alt="Power" class="w-6 h-6 sm:w-8 sm:h-8"><p class="text-xs sm:text-sm">80</p></div>
+        <div class="flex flex-col justify-center items-center gap-1"><img src="img/Defence.png" alt="Defence" class="w-6 h-6 sm:w-8 sm:h-8"><p class="text-xs sm:text-sm">60</p></div>
+        <div class="flex flex-col justify-center items-center gap-1"><img src="img/Speed.png" alt="Speed" class="w-6 h-6 sm:w-8 sm:h-8"><p class="text-xs sm:text-sm">90</p></div>
+      </div>
+      <div class="absolute top-0 right-0 w-1/3 h-5 bg-black flex justify-center items-center sm:h-6"><p class="text-white text-xs sm:text-sm">HP140</p></div>
+      <img src="Element-img/Fire.png" alt="Element" class="absolute top-2 left-2 w-6 h-6 sm:w-8 sm:h-8">
+    </div>
+
+    <div class="Card relative w-36 h-48 md:w-48 md:h-72 lg:w-64 lg:h-96 bg-gray-200 flex-shrink-0 rounded-lg flex flex-col justify-end items-center gap-2 bg-center bg-cover p-2 shadow-md overflow-hidden sm:gap-3 md:gap-4" style="border: 5px solid #fbbf24; background-image: url('Monsters-img/leviathan.png');">
+      <h3 class="text-white font-bold text-sm sm:text-2xl md:text-3xl drop-shadow-lg">Leviathan</h3>
+      <div class="card-description flex justify-around items-center w-full min-h-1/3 bg-gray-200 opacity-90 border-2 border-amber-300 p-1 rounded-xl sm:p-2 sm:rounded-2xl">
+        <div class="flex flex-col justify-center items-center gap-1"><img src="img/Power.png" alt="Power" class="w-6 h-6 sm:w-8 sm:h-8"><p class="text-xs sm:text-sm">70</p></div>
+        <div class="flex flex-col justify-center items-center gap-1"><img src="img/Defence.png" alt="Defence" class="w-6 h-6 sm:w-8 sm:h-8"><p class="text-xs sm:text-sm">85</p></div>
+        <div class="flex flex-col justify-center items-center gap-1"><img src="img/Speed.png" alt="Speed" class="w-6 h-6 sm:w-8 sm:h-8"><p class="text-xs sm:text-sm">65</p></div>
+      </div>
+      <div class="absolute top-0 right-0 w-1/3 h-5 bg-black flex justify-center items-center sm:h-6"><p class="text-white text-xs sm:text-sm">HP160</p></div>
+      <img src="Element-img/Water.png" alt="Element" class="absolute top-2 left-2 w-6 h-6 sm:w-8 sm:h-8">
+    </div>
+
+    <div class="Card relative w-36 h-48 md:w-48 md:h-72 lg:w-64 lg:h-96 bg-gray-200 flex-shrink-0 rounded-lg flex flex-col justify-end items-center gap-2 bg-center bg-cover p-2 shadow-md overflow-hidden sm:gap-3 md:gap-4" style="border: 5px solid #fbbf24; background-image: url('Monsters-img/thunderbird.png');">
+      <h3 class="text-white font-bold text-sm sm:text-2xl md:text-3xl drop-shadow-lg">Thunderbird</h3>
+      <div class="card-description flex justify-around items-center w-full min-h-1/3 bg-gray-200 opacity-90 border-2 border-amber-300 p-1 rounded-xl sm:p-2 sm:rounded-2xl">
+        <div class="flex flex-col justify-center items-center gap-1"><img src="img/Power.png" alt="Power" class="w-6 h-6 sm:w-8 sm:h-8"><p class="text-xs sm:text-sm">85</p></div>
+        <div class="flex flex-col justify-center items-center gap-1"><img src="img/Defence.png" alt="Defence" class="w-6 h-6 sm:w-8 sm:h-8"><p class="text-xs sm:text-sm">65</p></div>
+        <div class="flex flex-col justify-center items-center gap-1"><img src="img/Speed.png" alt="Speed" class="w-6 h-6 sm:w-8 sm:h-8"><p class="text-xs sm:text-sm">95</p></div>
+      </div>
+      <div class="absolute top-0 right-0 w-1/3 h-5 bg-black flex justify-center items-center sm:h-6"><p class="text-white text-xs sm:text-sm">HP130</p></div>
+      <img src="Element-img/Light.png" alt="Element" class="absolute top-2 left-2 w-6 h-6 sm:w-8 sm:h-8">
+    </div>
+
+    <div class="Card relative w-36 h-48 md:w-48 md:h-72 lg:w-64 lg:h-96 bg-gray-200 flex-shrink-0 rounded-lg flex flex-col justify-end items-center gap-2 bg-center bg-cover p-2 shadow-md overflow-hidden sm:gap-3 md:gap-4" style="border: 5px solid #656565; background-image: url('Monsters-img/titan_golem.png');">
+      <h3 class="text-white font-bold text-sm sm:text-2xl md:text-3xl drop-shadow-lg">Titan Golem</h3>
+      <div class="card-description flex justify-around items-center w-full min-h-1/3 bg-gray-200 opacity-90 border-2 border-gray-400 p-1 rounded-xl sm:p-2 sm:rounded-2xl">
+        <div class="flex flex-col justify-center items-center gap-1"><img src="img/Power.png" alt="Power" class="w-6 h-6 sm:w-8 sm:h-8"><p class="text-xs sm:text-sm">65</p></div>
+        <div class="flex flex-col justify-center items-center gap-1"><img src="img/Defence.png" alt="Defence" class="w-6 h-6 sm:w-8 sm:h-8"><p class="text-xs sm:text-sm">95</p></div>
+        <div class="flex flex-col justify-center items-center gap-1"><img src="img/Speed.png" alt="Speed" class="w-6 h-6 sm:w-8 sm:h-8"><p class="text-xs sm:text-sm">40</p></div>
+      </div>
+      <div class="absolute top-0 right-0 w-1/3 h-5 bg-black flex justify-center items-center sm:h-6"><p class="text-white text-xs sm:text-sm">HP180</p></div>
+      <img src="Element-img/Earth.png" alt="Element" class="absolute top-2 left-2 w-6 h-6 sm:w-8 sm:h-8">
+    </div>
+
+    <div class="Card relative w-36 h-48 md:w-48 md:h-72 lg:w-64 lg:h-96 bg-gray-200 flex-shrink-0 rounded-lg flex flex-col justify-end items-center gap-2 bg-center bg-cover p-2 shadow-md overflow-hidden sm:gap-3 md:gap-4" style="border: 5px solid #4752c7; background-image: url('Monsters-img/ice_wyrm.png');">
+      <h3 class="text-white font-bold text-sm sm:text-2xl md:text-3xl drop-shadow-lg">Ice Wyrm</h3>
+      <div class="card-description flex justify-around items-center w-full min-h-1/3 bg-gray-200 opacity-90 border-2 border-gray-400 p-1 rounded-xl sm:p-2 sm:rounded-2xl">
+        <div class="flex flex-col justify-center items-center gap-1"><img src="img/Power.png" alt="Power" class="w-6 h-6 sm:w-8 sm:h-8"><p class="text-xs sm:text-sm">70</p></div>
+        <div class="flex flex-col justify-center items-center gap-1"><img src="img/Defence.png" alt="Defence" class="w-6 h-6 sm:w-8 sm:h-8"><p class="text-xs sm:text-sm">70</p></div>
+        <div class="flex flex-col justify-center items-center gap-1"><img src="img/Speed.png" alt="Speed" class="w-6 h-6 sm:w-8 sm:h-8"><p class="text-xs sm:text-sm">70</p></div>
+      </div>
+      <div class="absolute top-0 right-0 w-1/3 h-5 bg-black flex justify-center items-center sm:h-6"><p class="text-white text-xs sm:text-sm">HP135</p></div>
+      <img src="Element-img/Water.png" alt="Element" class="absolute top-2 left-2 w-6 h-6 sm:w-8 sm:h-8">
+    </div>
+
+    <div class="Card relative w-36 h-48 md:w-48 md:h-72 lg:w-64 lg:h-96 bg-gray-200 flex-shrink-0 rounded-lg flex flex-col justify-end items-center gap-2 bg-center bg-cover p-2 shadow-md overflow-hidden sm:gap-3 md:gap-4" style="border: 5px solid #6c6c6c; background-image: url('Monsters-img/storm_griffin.png');">
+      <h3 class="text-white font-bold text-sm sm:text-2xl md:text-3xl drop-shadow-lg">Storm Griffin</h3>
+      <div class="card-description flex justify-around items-center w-full min-h-1/3 bg-gray-200 opacity-90 border-2 border-purple-400 p-1 rounded-xl sm:p-2 sm:rounded-2xl">
+        <div class="flex flex-col justify-center items-center gap-1"><img src="img/Power.png" alt="Power" class="w-6 h-6 sm:w-8 sm:h-8"><p class="text-xs sm:text-sm">75</p></div>
+        <div class="flex flex-col justify-center items-center gap-1"><img src="img/Defence.png" alt="Defence" class="w-6 h-6 sm:w-8 sm:h-8"><p class="text-xs sm:text-sm">60</p></div>
+        <div class="flex flex-col justify-center items-center gap-1"><img src="img/Speed.png" alt="Speed" class="w-6 h-6 sm:w-8 sm:h-8"><p class="text-xs sm:text-sm">85</p></div>
+      </div>
+      <div class="absolute top-0 right-0 w-1/3 h-5 bg-black flex justify-center items-center sm:h-6"><p class="text-white text-xs sm:text-sm">HP120</p></div>
+      <img src="Element-img/Air.png" alt="Element" class="absolute top-2 left-2 w-6 h-6 sm:w-8 sm:h-8">
+    </div>
+
+    <div class="Card relative w-36 h-48 md:w-48 md:h-72 lg:w-64 lg:h-96 bg-gray-200 flex-shrink-0 rounded-lg flex flex-col justify-end items-center gap-2 bg-center bg-cover p-2 shadow-md overflow-hidden sm:gap-3 md:gap-4" style="border: 5px solid #a855f7; background-image: url('Monsters-img/inferno_cerberus.png');">
+      <h3 class="text-white font-bold text-sm sm:text-2xl md:text-2xl drop-shadow-lg">Inferno Cerberus</h3>
+      <div class="card-description flex justify-around items-center w-full min-h-1/3 bg-gray-200 opacity-90 border-2 border-purple-400 p-1 rounded-xl sm:p-2 sm:rounded-2xl">
+        <div class="flex flex-col justify-center items-center gap-1"><img src="img/Power.png" alt="Power" class="w-6 h-6 sm:w-8 sm:h-8"><p class="text-xs sm:text-sm">80</p></div>
+        <div class="flex flex-col justify-center items-center gap-1"><img src="img/Defence.png" alt="Defence" class="w-6 h-6 sm:w-8 sm:h-8"><p class="text-xs sm:text-sm">65</p></div>
+        <div class="flex flex-col justify-center items-center gap-1"><img src="img/Speed.png" alt="Speed" class="w-6 h-6 sm:w-8 sm:h-8"><p class="text-xs sm:text-sm">60</p></div>
+      </div>
+      <div class="absolute top-0 right-0 w-1/3 h-5 bg-black flex justify-center items-center sm:h-6"><p class="text-white text-xs sm:text-sm">HP145</p></div>
+      <img src="Element-img/Fire.png" alt="Element" class="absolute top-2 left-2 w-6 h-6 sm:w-8 sm:h-8">
+    </div>
+      
     </div>
   </section>
   <section>
-    <div class="w-full h-auto bg-white flex flex-col justify-center items-center py-16 px-8 gap-4 md:gap-24 sm:grid sm:grid-cols-2 md:flex md:flex-row md:justify-evenly">
-      <div class=" flex flex-col justify-center items-center shadow-md px-2 py-6 rounded-lg md:w-1/4 md:px-4">
+    <div class="w-full h-auto bg-white grid grid-cols-2 md:grid-cols-4 gap-8 py-16 px-8">
+      <div class=" flex flex-col justify-center items-center shadow-md px-2 py-6 rounded-lg w-full">
         <i class="fi fi-rs-users-alt text-3xl gold"></i>
         <h3 class="text-2xl font-bold">+50000</h3>
         <p class="text-gray-600 ">active players</p>
       </div>
-      <div class="flex flex-col justify-center items-center shadow-md px-4 py-6 rounded-lg md:w-1/4">
+      <div class="flex flex-col justify-center items-center shadow-md px-2 py-6 rounded-lg w-full">
         <i class="fi fi-rs-trophy text-3xl gold"></i>
         <h3 class="text-2xl font-bold">+10K</h3>
         <p class="text-gray-600 ">tournaments held</p>
       </div>
 
-      <div class="flex flex-col justify-center items-center shadow-md px-4 py-6 rounded-lg md:w-1/4">
+      <div class="flex flex-col justify-center items-center shadow-md px-2 py-6 rounded-lg w-full">
         <i class="fi fi-br-exchange-alt text-3xl gold"></i>
         <h3 class="text-2xl font-bold">+1M</h3>
         <p class="text-gray-600 ">made exchanges</p>
       </div>
-      <div class="flex flex-col justify-center items-center shadow-md px-4 py-6 rounded-lg md:w-1/4">
+      <div class="flex flex-col justify-center items-center shadow-md px-2 py-6 rounded-lg w-full">
         <i class="fi fi-rs-coins text-3xl gold"></i>
         <h3 class="text-2xl font-bold">+5M</h3>
         <p class="text-gray-600 ">cards traded</p>

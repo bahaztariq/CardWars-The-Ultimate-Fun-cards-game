@@ -76,7 +76,26 @@
     </ul>
   </nav>
   <section class="Card-detailles hidden fixed w-3/4 h-128 top-1/2 left-1/2 text-center bg-gray-200 rounded-2xl"></section>
-  <section id="Favourite-container" class="Favourite-container w-full min-h-64 p-4 grid grid-cols-2 mt-4 gap-4 md:grid-cols-3 lg:grid-cols-5"></section>
+  <section class="Favourite flex flex-col w-full min-h-screen bg-gray-100 pt-8 pb-16 px-4 md:px-16 lg:px-32">
+    <h1 class="text-5xl font-bold text-black mb-4">My Favourite Cards</h1>
+    <hr>
+    <div class="w-full  flex  flex-col justify-center items-center px-8 py-6 gap-4 md:justify-evenly md:flex-row md:px-24 mt-8">
+      <div class="w-64 h-24 border rounded flex flex-col items-baseline justify-center p-4">
+        <h3 class="text-2xl text-black font-bold">Total Cards</h3>
+        <p id="total-fav-cards" class="text-xl font-semibold text-black mt-2">0</p>
+      </div>
+      <div class="w-64 h-24 border rounded flex flex-col items-baseline justify-center p-4">
+        <h3 class="text-2xl text-black font-bold">Total Value</h3>
+        <p id="total-fav-value" class="text-xl font-semibold text-black mt-2">0$</p>
+      </div>
+      <div class="w-64 h-24 border rounded flex flex-col items-baseline justify-center p-4">
+        <h3 class="text-2xl text-black font-bold">Most Expensive</h3>
+        <p id="most-expensive-fav" class="text-xl font-semibold text-black mt-2">0$</p>
+      </div>
+    </div>
+    <section id="Favourite-container" class="Favourite-container w-full min-h-64 p-4 grid grid-cols-2 mt-4 gap-4 md:grid-cols-3 lg:grid-cols-4">
+    </section>
+  </section>
   <footer class="flex flex-col w-full h-16 bg-black">
         <div class="bag-gold w-full  flex  flex-col justify-center items-center px-8 py-6 gap-4 md:justify-between md:flex-row md:px-24">
           <h3 class="text-3xl font-bold text-black">Stay Connected</h3>

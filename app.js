@@ -1,7 +1,13 @@
 const header = document.querySelector("header");
+const slider = document.getElementById("slider-container");
+const prevBtn = document.getElementById("prev-btn");
+const nextBtn = document.getElementById("next-btn");
 const showButtons = document.querySelectorAll('.show-question');
 const resetbtn = document.getElementById("reset");
-const applyFilterBtn = document.querySelector(".Apply-filter")
+const applyFilterBtn = document.querySelector(".Apply-filter");
+const totalFav = document.getElementById('total-fav-cards');
+const totalValueFav = document.getElementById('total-fav-value');
+const mostExpensiveFav = document.getElementById('most-expensive-fav');
 //rarity
 const rarity = document.querySelectorAll('[name="Rarity"]');
 const Commun =document.getElementById('Commun');
@@ -37,6 +43,26 @@ let Collections = JSON.parse(localStorage.getItem('Collections')) || [];
 let Cart = JSON.parse(localStorage.getItem('Cart')) || [];
 let monsterLength;
 
+
+
+if (slider && prevBtn && nextBtn) {
+    const scrollAmount = 300; 
+
+    nextBtn.addEventListener("click", () => {
+      slider.scrollBy({
+        left: scrollAmount,
+        behavior: "smooth"
+      });
+    });
+
+    prevBtn.addEventListener("click", () => {
+      slider.scrollBy({
+        left: -scrollAmount,
+        behavior: "smooth"
+      });
+    });
+
+  }
 
 //fetching data from json file
 fetch('Monsters.json')
@@ -121,6 +147,7 @@ function showfavourites(){
         const monster = allMonsters.find(m => String(m.id) == monsterId);
         if (monster) {
             CreateCard(monster, FavouriteContainer);
+            totalFav.textContent = Favourites.length;
         }
     });
 }
