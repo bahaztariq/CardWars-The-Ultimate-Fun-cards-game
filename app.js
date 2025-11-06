@@ -5,17 +5,18 @@ const nextBtn = document.getElementById("next-btn");
 const showButtons = document.querySelectorAll('.show-question');
 const resetbtn = document.getElementById("reset");
 const applyFilterBtn = document.querySelector(".Apply-filter");
+
 const totalFav = document.getElementById('total-fav-cards');
 const totalValueFav = document.getElementById('total-fav-value');
 const mostExpensiveFav = document.getElementById('most-expensive-fav');
-//rarity
+
 const rarity = document.querySelectorAll('[name="Rarity"]');
 const Commun =document.getElementById('Commun');
 const Rare =document.getElementById('Rare');
 const Epic =document.getElementById('Epic');
 const Legendary =document.getElementById('Legendary');
 const mythic =document.getElementById('Mythic');
-//element
+
 const elements =document.querySelectorAll('[name="Element"]');
 const fire= document.getElementById('Fire');
 const water= document.getElementById('Water');
@@ -23,11 +24,11 @@ const earth= document.getElementById('Earth');
 const air= document.getElementById('Air');
 const light= document.getElementById('Light');
 const dark= document.getElementById('Dark');
-//containers
+
 const MarketContainer= document.querySelector('.Market-cards');
 const FavouriteContainer=document.querySelector('.Favourite-container');
 const CollectionContainer=document.querySelector('.collection-container');
-//cart
+
 const CartContainer=document.querySelector('.Cart-container');
 const cartPanel = document.getElementById('cart-panel');
 const showcartbtn = document.getElementById('show-cart');
@@ -35,8 +36,10 @@ const closeCartBtn = document.getElementById('close-cart');
 const clearCartBtn = document.getElementById('clear-cart');
 const cartTotalPrice = document.getElementById('cart-total-price');
 const openCartBtns = document.querySelectorAll('.fi-rs-shopping-cart');
+const checkoutBtn = document.getElementById('checkout'); 
 
-//colors for rarity border
+const paginationContainer = document.getElementById('pagination-container');
+
 const colors = {
 	  'Common': '#373636ff',
 	  'Rare': '#0000FF',
@@ -51,6 +54,9 @@ let Collections = JSON.parse(localStorage.getItem('Collections')) || [];
 let Cart = JSON.parse(localStorage.getItem('Cart')) || [];
 let monsterLength;
 
+let currentPage = 1;
+let cardsPerPage = 8; 
+let currentMonsterList = [];
 
 if (slider && prevBtn && nextBtn) {
     const scrollAmount = 300; 
@@ -74,8 +80,12 @@ fetch('Monsters.json')
 .then(response => response.json())
 .then(data => {
     allMonsters = data;
-    displayCards(allMonsters); 
+    currentMonsterList = [...allMonsters]; 
+    
+    renderPage();
+    
     showfavourites();
+    displayCollections(); 
     displayCart();
 })
 .catch(error => console.error('Error loading monsters:', error));
@@ -95,8 +105,6 @@ showButtons.forEach((button) => {
 
 const cardDetailles = document.querySelector('.Card-detailles');
 
-
-//******************************************************************************** */
 document.addEventListener('click', function(e){
     if(e.target.classList.contains('Card')){
         if (cardDetailles) cardDetailles.classList.toggle('hidden');
@@ -109,8 +117,8 @@ document.addEventListener('click', function(e){
         const monsterId = favBtn.dataset.monsterId;
         addToFavourites(monsterId);
         showfavourites();
-        const filtered = filterMonsters();
-        displayCards(filtered);
+        
+        renderPage();
         return;
     }
 
@@ -127,7 +135,22 @@ document.addEventListener('click', function(e){
         removeFromCart(monsterId);
         return;
     }
+
+    const increaseBtn = e.target.closest('.increase-quantity-btn');
+    if (increaseBtn) {
+        const monsterId = increaseBtn.dataset.monsterId;
+        increaseCartQuantity(monsterId);
+        return;
+    }
+
+    const decreaseBtn = e.target.closest('.decrease-quantity-btn');
+    if (decreaseBtn) {
+        const monsterId = decreaseBtn.dataset.monsterId;
+        decreaseCartQuantity(monsterId);
+        return;
+    }
 });
+
 if (cartPanel) {
   openCartBtns.forEach(btn => {
     btn.addEventListener('click', (e) => {
@@ -156,6 +179,12 @@ if (clearCartBtn) {
   });
 }
 
+if (checkoutBtn) {
+    checkoutBtn.addEventListener('click', () => {
+        checkout();
+    });
+}
+
 function addToFavourites(monsterId){
     if(Favourites.includes(monsterId)){
         Favourites = Favourites.filter(id => id !== monsterId);
@@ -166,18 +195,45 @@ function addToFavourites(monsterId){
 }
 
 function addToCart(monsterId){
-    if(!Cart.includes(monsterId)){ 
-        Cart.push(monsterId);
-        localStorage.setItem('Cart', JSON.stringify(Cart));
+    const existingItem = Cart.find(item => item.id === monsterId);
+
+    if (existingItem) {
+        existingItem.quantity++;
+    } else {
+        Cart.push({ id: monsterId, quantity: 1 });
     }
+    
+    localStorage.setItem('Cart', JSON.stringify(Cart));
     displayCart();
     cartPanel.classList.remove('hidden');
 }
 
 function removeFromCart(monsterId) {
-    Cart = Cart.filter(id => id !== monsterId);
+    Cart = Cart.filter(item => item.id !== monsterId);
     localStorage.setItem('Cart', JSON.stringify(Cart));
     displayCart();
+}
+
+function increaseCartQuantity(monsterId) {
+    const item = Cart.find(item => item.id === monsterId);
+    if (item) {
+        item.quantity++;
+        localStorage.setItem('Cart', JSON.stringify(Cart));
+        displayCart();
+    }
+}
+
+function decreaseCartQuantity(monsterId) {
+    const item = Cart.find(item => item.id === monsterId);
+    if (item && item.quantity > 1) {
+        item.quantity--;
+    } else if (item && item.quantity === 1) {
+        removeFromCart(monsterId);
+    }
+    if (item) {
+        localStorage.setItem('Cart', JSON.stringify(Cart));
+        displayCart();
+    }
 }
 
 function displayCart() {
@@ -192,27 +248,59 @@ function displayCart() {
         return;
     }
 
-    Cart.forEach(monsterId => {
-        const monster = allMonsters.find(m => String(m.id) == monsterId);
+    Cart.forEach(cartItem => {
+        const monster = allMonsters.find(m => String(m.id) == cartItem.id);
         if (monster) {
-            currentTotal += monster.price;
-            const cartItem = document.createElement('div');
-            cartItem.className = 'w-full h-20 flex items-center gap-2 p-1 border rounded';
-            cartItem.innerHTML = `
+            currentTotal += monster.price * cartItem.quantity;
+            const cartItemElement = document.createElement('div');
+            cartItemElement.className = 'w-full h-24 flex items-center gap-2 p-1 border rounded';
+            cartItemElement.innerHTML = `
                 <img src="Monsters-img/${monster.image}" alt="${monster.name}" class="w-16 h-full object-cover rounded" style="border: 2px solid ${colors[monster.rarity]}">
                 <div class="flex-1">
                     <p class="font-semibold text-sm">${monster.name}</p>
-                    <p class="font-bold text-xs">$${monster.price.toFixed(2)}</p>
+                    <p class="font-bold text-xs">$${monster.price.toFixed(2)} (each)</p>
+                    <div class="flex items-center gap-2 mt-2">
+                        <button class="decrease-quantity-btn w-6 h-6 bg-gray-200 rounded font-bold" data-monster-id="${monster.id}">-</button>
+                        <span class="font-bold">${cartItem.quantity}</span>
+                        <button class="increase-quantity-btn w-6 h-6 bg-gray-200 rounded font-bold" data-monster-id="${monster.id}">+</button>
+                    </div>
                 </div>
-                <button class="remove-from-cart-btn text-red-500 p-2" data-monster-id="${monster.id}">
+                <button class="remove-from-cart-btn text-red-500 p-2 self-start" data-monster-id="${monster.id}">
                     <i class="fi fi-rr-trash"></i>
                 </button>
             `;
-            CartContainer.appendChild(cartItem);
+            CartContainer.appendChild(cartItemElement);
         }
     });
 
     if (cartTotalPrice) cartTotalPrice.textContent = `$${currentTotal.toFixed(2)}`;
+}
+
+function checkout() {
+    if (Cart.length === 0) {
+        alert("Your cart is empty!");
+        return;
+    }
+
+    Cart.forEach(cartItem => {
+        const collectionItem = Collections.find(item => item.id === cartItem.id);
+
+        if (collectionItem) {
+            collectionItem.quantity += cartItem.quantity;
+        } else {
+            Collections.push({ id: cartItem.id, quantity: cartItem.quantity });
+        }
+    });
+
+    localStorage.setItem('Collections', JSON.stringify(Collections));
+
+    Cart = [];
+    localStorage.setItem('Cart', JSON.stringify(Cart));
+
+    displayCart();
+    displayCollections(); 
+    cartPanel.classList.add('hidden');
+    alert('Checkout successful! Your cards have been added to your collection.');
 }
 
 function showfavourites(){
@@ -223,19 +311,96 @@ function showfavourites(){
     if (Favourites.length === 0) {
         FavouriteContainer.innerHTML = '<p class="text-black text-xl">No favourites added yet.</p>';
         if (totalFav) totalFav.textContent = '0';
+        if (totalValueFav) totalValueFav.textContent = '$0';
+        if (mostExpensiveFav) mostExpensiveFav.textContent = '$0';
         return;
     }
+
+    let totalCards = 0;
+    let totalValue = 0;
+    let mostExpensivePrice = 0;
 
     Favourites.forEach((monsterId) => {
         const monster = allMonsters.find(m => String(m.id) == monsterId);
         if (monster) {
-            CreateCard(monster, FavouriteContainer);
-            if (totalFav) totalFav.textContent = Favourites.length;
+            CreateCard(monster, FavouriteContainer); 
+            
+            totalCards++;
+            totalValue += monster.price;
+            if (monster.price > mostExpensivePrice) {
+                mostExpensivePrice = monster.price;
+            }
         }
     });
+
+    if (totalFav) totalFav.textContent = totalCards;
+    if (totalValueFav) totalValueFav.textContent = `$${totalValue.toFixed(2)}`;
+    if (mostExpensiveFav) mostExpensiveFav.textContent = `$${mostExpensivePrice.toFixed(2)}`;
 }
-/********************************************************************************** */
-//Reseting filters
+
+function displayCollections() {
+    if (!CollectionContainer) return; 
+
+    CollectionContainer.innerHTML = '';
+
+    if (Collections.length === 0) {
+        CollectionContainer.innerHTML = '<p class="text-black text-xl">Your collection is empty. Visit the Market to buy cards!</p>';
+        if (totalFav) totalFav.textContent = '0';
+        if (totalValueFav) totalValueFav.textContent = '$0';
+        if (mostExpensiveFav) mostExpensiveFav.textContent = '$0';
+        return;
+    }
+
+    let totalCards = 0;
+    let totalValue = 0;
+    let mostExpensivePrice = 0;
+
+    Collections.forEach(collectionItem => {
+        const monster = allMonsters.find(m => m.id == collectionItem.id);
+        if (monster) {
+            totalCards += collectionItem.quantity;
+            totalValue += monster.price * collectionItem.quantity;
+            if (monster.price > mostExpensivePrice) {
+                mostExpensivePrice = monster.price;
+            }
+
+            CreateCollectionCard(monster, collectionItem.quantity, CollectionContainer);
+        }
+    });
+
+    if (totalFav) totalFav.textContent = totalCards;
+    if (totalValueFav) totalValueFav.textContent = `$${totalValue.toFixed(2)}`;
+    if (mostExpensiveFav) mostExpensiveFav.textContent = `$${mostExpensivePrice.toFixed(2)}`;
+}
+
+function CreateCollectionCard(cardObject, quantity, container) {
+    const CardContainer = document.createElement('div');
+    CardContainer.classList.add('Card-Container', 'bg-gray-300', 'rounded-lg', 'p-2', 'w-full');
+    CardContainer.innerHTML = `
+<div class="Card relative w-full aspect-[2/3] bg-gray-200 rounded-lg flex flex-col justify-end items-center gap-2 bg-center bg-cover p-2 shadow-md sm:gap-3 md:gap-4" style="border: 5px solid ${colors[cardObject.rarity]}; background-image: url('Monsters-img/${cardObject.image}');">
+    
+    <div class="absolute top-2 right-2 w-10 h-10 bg-blue-600 text-white flex items-center justify-center rounded-full font-bold text-lg border-2 border-white">
+      x${quantity}
+    </div>
+
+    <h3 class="text-white font-bold text-xl sm:text-2xl md:text-3xl drop-shadow-lg">${cardObject.name}</h3>
+    <div class="card-description flex justify-around items-center w-full min-h-1/3 bg-gray-200 opacity-90 border-2 border-amber-300 p-1 rounded-xl sm:p-2 sm:rounded-2xl">
+        <div class="flex flex-col justify-center items-center gap-1"><img src="img/Power.png" alt="Power" class="w-6 h-6 sm:w-8 sm:h-8"><p class="text-xs sm:text-sm">${cardObject.Power}</p></div>
+        <div class="flex flex-col justify-center items-center gap-1"><img src="img/Defence.png" alt="Defence" class="w-6 h-6 sm:w-8 sm:h-8"><p class="text-xs sm:text-sm">${cardObject.Defence}</p></div>
+        <div class="flex flex-col justify-center items-center gap-1"><img src="img/Speed.png" alt="Speed" class="w-6 h-6 sm:w-8 sm:h-8"><p class="text-xs sm:text-sm">${cardObject.Speed}</p></div>
+    </div>
+    <div class="absolute top-0 right-0 w-1/3 h-5 bg-black flex justify-center items-center sm:h-6"><p class="text-white text-xs sm:text-sm">HP${cardObject.hp}</p></div>
+    <img src="Element-img/${cardObject.element}.png" alt="Element" class="absolute top-2 left-2 w-6 h-6 sm:w-8 sm:h-8">
+</div>
+<div class="card-infos flex flex-col w-full p-2 gap-1">
+    <p class="font-semibold text-sm sm:text-base">${cardObject.name}</p>
+    <p class="w-fit text-amber-300 bg-black p-1 px-2 rounded-2xl text-xs">${cardObject.rarity}</p>
+    <p class="font-bold text-sm sm:text-base">Value: $${(cardObject.price * quantity).toFixed(2)}</p>
+</div>
+`;
+    container.appendChild(CardContainer);
+}
+
 if (resetbtn) {
     resetbtn.addEventListener('click', () => {
         rarity.forEach((checkbox) => {
@@ -244,7 +409,10 @@ if (resetbtn) {
         elements.forEach((element) =>{
             element.checked = false;
         });
-        displayCards(allMonsters);
+        
+        currentMonsterList = [...allMonsters];
+        currentPage = 1;
+        renderPage();
     });
 }
 
@@ -252,15 +420,15 @@ if (resetbtn) {
 if (applyFilterBtn) {
     applyFilterBtn.addEventListener('click', () => {
         const filtered = filterMonsters();
-        displayCards(filtered);
+        currentMonsterList = filtered;
+        currentPage = 1;
+        renderPage();
 	});
 }
 
-// create a filtred liste
 function filterMonsters() {
     let filtered = [...allMonsters];
 
-    // Filter by Rarity
     const selectedRarities = [];
     rarity.forEach((checkbox) => {
         if (checkbox.checked) {
@@ -272,7 +440,6 @@ function filterMonsters() {
         filtered = filtered.filter(monster => selectedRarities.includes(monster.rarity));
     }
 
-    // Filter by Element
     const selectedElements = [];
     elements.forEach((checkbox) => {
         if (checkbox.checked) {
@@ -286,23 +453,93 @@ function filterMonsters() {
     return filtered;
 }
 
-// // display list
-function displayCards(monstersArray) {
+function renderPage() {
+    displayPaginatedCards(currentMonsterList);
+    setupPagination(currentMonsterList);
+}
+
+function displayPaginatedCards(monstersArray) {
     if (!MarketContainer) return; 
 
     MarketContainer.innerHTML = '';
+    
+    const startIndex = (currentPage - 1) * cardsPerPage;
+    const endIndex = startIndex + cardsPerPage;
+    const paginatedItems = monstersArray.slice(startIndex, endIndex);
 
     if (monstersArray.length === 0) {
         MarketContainer.innerHTML = '<p class="text-black text-xl">No monsters found matching your filters.</p>';
         return;
     }
 
-    monstersArray.forEach((monster) => {
+    paginatedItems.forEach((monster) => {
         CreateCard(monster, MarketContainer);
     });
 }
 
-// Create card (Unchanged)
+function setupPagination(monstersArray) {
+    if (!paginationContainer) return;
+    paginationContainer.innerHTML = '';
+    
+    const totalCards = monstersArray.length;
+    const totalPages = Math.ceil(totalCards / cardsPerPage);
+    
+    if (totalPages <= 1) return; 
+
+    paginationContainer.appendChild(createPaginationButton('Prev', currentPage > 1));
+
+    for (let i = 1; i <= totalPages; i++) {
+        paginationContainer.appendChild(createPaginationButton(i, true, i === currentPage));
+    }
+
+    paginationContainer.appendChild(createPaginationButton('Next', currentPage < totalPages));
+}
+
+function createPaginationButton(text, enabled, isActive = false) {
+    const button = document.createElement('button');
+    button.innerText = text;
+    button.dataset.page = text;
+    
+    button.className = 'px-4 py-2 rounded border border-gray-300';
+    
+    if (isActive) {
+        button.classList.add('bg-black', 'text-amber-300', 'font-bold');
+    } else {
+        button.classList.add('bg-white', 'text-black');
+    }
+    
+    if (!enabled) {
+        button.disabled = true;
+        button.classList.add('opacity-50', 'cursor-not-allowed');
+    } else {
+        button.classList.add('cursor-pointer', 'hover:bg-gray-100');
+    }
+    
+    return button;
+}
+
+if (paginationContainer) {
+    paginationContainer.addEventListener('click', (e) => {
+        const target = e.target.closest('button');
+        if (!target) return;
+        
+        const pageText = target.dataset.page;
+        
+        if (pageText === 'Prev') {
+            if (currentPage > 1) currentPage--;
+        } else if (pageText === 'Next') {
+            const totalPages = Math.ceil(currentMonsterList.length / cardsPerPage);
+            if (currentPage < totalPages) currentPage++;
+        } else {
+            currentPage = parseInt(pageText);
+        }
+        
+        renderPage();
+        
+        window.scrollTo(0, MarketContainer.offsetTop);
+    });
+}
+
 function CreateCard(cardObject, container) {
     const monsterId = String(cardObject.id);
     if (!monsterId) {
