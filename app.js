@@ -27,7 +27,15 @@ const dark= document.getElementById('Dark');
 const MarketContainer= document.querySelector('.Market-cards');
 const FavouriteContainer=document.querySelector('.Favourite-container');
 const CollectionContainer=document.querySelector('.collection-container');
+//cart
 const CartContainer=document.querySelector('.Cart-container');
+const cartPanel = document.getElementById('cart-panel');
+const showcartbtn = document.getElementById('show-cart');
+const closeCartBtn = document.getElementById('close-cart');
+const clearCartBtn = document.getElementById('clear-cart');
+const cartTotalPrice = document.getElementById('cart-total-price');
+const openCartBtns = document.querySelectorAll('.fi-rs-shopping-cart');
+
 //colors for rarity border
 const colors = {
 	  'Common': '#373636ff',
@@ -36,13 +44,12 @@ const colors = {
 	  'Legendary': '#FFA500',
 	  'Mythic': '#FF0000'
 };
-//global variables
+
 let allMonsters = [];
 let Favourites = JSON.parse(localStorage.getItem('Favourites')) || [];
 let Collections = JSON.parse(localStorage.getItem('Collections')) || [];
 let Cart = JSON.parse(localStorage.getItem('Cart')) || [];
 let monsterLength;
-
 
 
 if (slider && prevBtn && nextBtn) {
@@ -61,20 +68,19 @@ if (slider && prevBtn && nextBtn) {
         behavior: "smooth"
       });
     });
+}
 
-  }
-
-//fetching data from json file
 fetch('Monsters.json')
 .then(response => response.json())
 .then(data => {
     allMonsters = data;
     displayCards(allMonsters); 
     showfavourites();
+    displayCart();
 })
 .catch(error => console.error('Error loading monsters:', error));
 
-// show faq answer
+
 showButtons.forEach((button) => {
     button.addEventListener('click', () => {
         const answer = button.closest('.Questions').querySelector('.answer');
@@ -87,7 +93,6 @@ showButtons.forEach((button) => {
     });
 });
 
-// showCard Detailles
 const cardDetailles = document.querySelector('.Card-detailles');
 
 
@@ -104,6 +109,8 @@ document.addEventListener('click', function(e){
         const monsterId = favBtn.dataset.monsterId;
         addToFavourites(monsterId);
         showfavourites();
+        const filtered = filterMonsters();
+        displayCards(filtered);
         return;
     }
 
@@ -113,7 +120,41 @@ document.addEventListener('click', function(e){
         addToCart(monsterId);
         return;
     }
+
+    const removeBtn = e.target.closest('.remove-from-cart-btn');
+    if (removeBtn) {
+        const monsterId = removeBtn.dataset.monsterId;
+        removeFromCart(monsterId);
+        return;
+    }
 });
+if (cartPanel) {
+  openCartBtns.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        cartPanel.classList.remove('hidden');
+    });
+  });
+
+  if (closeCartBtn) {
+    closeCartBtn.addEventListener('click', () => {
+      cartPanel.classList.add('hidden');
+    });
+  }
+  if(showcartbtn){
+	showcartbtn.addEventListener('click', () =>{
+		cartPanel.classList.remove('hidden');
+	})
+  }
+}
+
+if (clearCartBtn) {
+  clearCartBtn.addEventListener('click', () => {
+    Cart = [];
+    localStorage.setItem('Cart', JSON.stringify(Cart));
+    displayCart();
+  });
+}
 
 function addToFavourites(monsterId){
     if(Favourites.includes(monsterId)){
@@ -125,12 +166,53 @@ function addToFavourites(monsterId){
 }
 
 function addToCart(monsterId){
-    if(Cart.includes(monsterId)){
-        Cart = Cart.filter(id => id !== monsterId);
-    }else{
+    if(!Cart.includes(monsterId)){ 
         Cart.push(monsterId);
+        localStorage.setItem('Cart', JSON.stringify(Cart));
     }
+    displayCart();
+    cartPanel.classList.remove('hidden');
+}
+
+function removeFromCart(monsterId) {
+    Cart = Cart.filter(id => id !== monsterId);
     localStorage.setItem('Cart', JSON.stringify(Cart));
+    displayCart();
+}
+
+function displayCart() {
+    if (!CartContainer) return;
+
+    CartContainer.innerHTML = '';
+    let currentTotal = 0;
+
+    if (Cart.length === 0) {
+        CartContainer.innerHTML = '<p class="text-gray-500 text-center">Your cart is empty.</p>';
+        if (cartTotalPrice) cartTotalPrice.textContent = '$0.00';
+        return;
+    }
+
+    Cart.forEach(monsterId => {
+        const monster = allMonsters.find(m => String(m.id) == monsterId);
+        if (monster) {
+            currentTotal += monster.price;
+            const cartItem = document.createElement('div');
+            cartItem.className = 'w-full h-20 flex items-center gap-2 p-1 border rounded';
+            cartItem.innerHTML = `
+                <img src="Monsters-img/${monster.image}" alt="${monster.name}" class="w-16 h-full object-cover rounded" style="border: 2px solid ${colors[monster.rarity]}">
+                <div class="flex-1">
+                    <p class="font-semibold text-sm">${monster.name}</p>
+                    <p class="font-bold text-xs">$${monster.price.toFixed(2)}</p>
+                </div>
+                <button class="remove-from-cart-btn text-red-500 p-2" data-monster-id="${monster.id}">
+                    <i class="fi fi-rr-trash"></i>
+                </button>
+            `;
+            CartContainer.appendChild(cartItem);
+        }
+    });
+
+    if (cartTotalPrice) cartTotalPrice.textContent = `$${currentTotal.toFixed(2)}`;
 }
 
 function showfavourites(){
@@ -140,6 +222,7 @@ function showfavourites(){
     
     if (Favourites.length === 0) {
         FavouriteContainer.innerHTML = '<p class="text-black text-xl">No favourites added yet.</p>';
+        if (totalFav) totalFav.textContent = '0';
         return;
     }
 
@@ -147,7 +230,7 @@ function showfavourites(){
         const monster = allMonsters.find(m => String(m.id) == monsterId);
         if (monster) {
             CreateCard(monster, FavouriteContainer);
-            totalFav.textContent = Favourites.length;
+            if (totalFav) totalFav.textContent = Favourites.length;
         }
     });
 }
@@ -219,7 +302,7 @@ function displayCards(monstersArray) {
     });
 }
 
-// Create card
+// Create card (Unchanged)
 function CreateCard(cardObject, container) {
     const monsterId = String(cardObject.id);
     if (!monsterId) {

@@ -25,7 +25,7 @@
           <a href="Market.html" class="">Market</a>
         </li>
         <li>
-          <a href="Arena.html" class="gold text-3xl font-bold">Play Now</a>
+          <a href="#" class="gold text-3xl font-bold">Play Now</a>
         </li>
         <li>
           <a href="Collection.html" class="">Collection</a>
@@ -36,11 +36,33 @@
       </ul>
     </nav>
     <div class="hidden md:block">
-      <a href="Cart.html" class="gold text-2xl ">
+      <button id="show-cart" class="gold text-2xl" >
         <i class="fi fi-rs-shopping-cart"></i>
-      </a>
+      </button>
     </div>
   </header>
+  <section id="cart-panel" class="fixed top-0 right-0 w-full max-w-72 h-screen bg-white z-50 hidden shadow-lg md:max-w-96">
+  <div class="relative w-full h-full flex flex-col gap-2 items-center p-2">
+    <h3 class="text-4xl text-black font-bold">Cart</h3>
+    
+    <button id="close-cart" class=" cursor-pointer text-black rounded absolute right-4 top-4 text-2xl">
+      <i class="fi fi-rr-cross-circle"></i>
+    </button>
+    
+    <div class="Cart-container w-full flex-1 flex flex-col gap-2 overflow-y-auto p-2">
+      </div>
+    
+    <div class="w-full p-2 border-t">
+      <h4 class="text-xl font-bold text-black flex justify-between">
+        <span>Total:</span>
+        <span id="cart-total-price">$0.00</span>
+      </h4>
+    </div>
+
+    <button id="checkout" class="w-full h-12 text-center bg-black text-black font-bold rounded cursor-pointer bag-gold">Checkout</button>
+    <button id="clear-cart" class="w-full h-12 text-center bg-black text-white font-bold rounded cursor-pointer">Clear Cart</button>
+  </div>
+</section>
   <nav class="fixed bottom-0 w-full h-20 bg-black z-50 flex justify-around items-center md:hidden">
     <ul class="w-full flex items-center justify-evenly text-white text-lg font-semibold gap-8">
       <li>
