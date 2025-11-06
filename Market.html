@@ -41,7 +41,7 @@
       </a>
     </div>
   </header>
-  <nav class="fixed bottom-0 w-full h-20 bg-black flex justify-around items-center md:hidden">
+  <nav class="fixed bottom-0 w-full h-20 bg-black flex justify-around items-center z-50 md:hidden">
     <ul class="w-full flex items-center justify-evenly text-white text-lg font-semibold gap-8">
       <li>
         <a href="Guide.html" class="flex flex-col items-center">
@@ -75,7 +75,9 @@
       </li>
     </ul>
   </nav>
-  <section class="Card-detailles hidden fixed w-3/4 h-128 top-1/2 left-1/2 text-center bg-gray-200 rounded-2xl"></section>
+<section class="Card-detailles hidden fixed w-3/4 h-128 top-1/2 left-1/2 text-center bg-gray-200 rounded-2xl -translate-1/2 z-50 shadow-md flex ">
+   <button class="close-btn text-2xl text-black self-end cursor-pointer"><i class="fi fi-rr-cross-circle"></i></button>
+</section>
 
 <section class="w-full bg-white flex">
 <aside class="hidden flex flex-col gap-4 w-1/5 px-6 py-8 lg:block">
@@ -90,19 +92,19 @@
 <label for="Commun">Commun</label>
 </div>
 <div>
-<input type="checkbox" id="rare" name="Rarity" value="rare">
+<input type="checkbox" id="rare" name="Rarity" value="Rare">
 <label for="rare">Rare</label>
 </div>
 <div>
-<input type="checkbox" id="" name="Rarity" value="epic">
+<input type="checkbox" id="" name="Rarity" value="Epic">
 <label for="epic">Epic</label>
 </div>
 <div>
-<input type="checkbox" id="" name="Rarity" value="legendary">
+<input type="checkbox" id="" name="Rarity" value="Legendary">
 <label for="legendary">Legendary</label>
 </div>
 <div>
-<input type="checkbox" id="" name="Rarity" value="mythic">
+<input type="checkbox" id="" name="Rarity" value="Mythic">
 <label for="mythic">Mythic</label>
 </div>
 </div>
@@ -118,16 +120,20 @@
 <label for="Water">Water</label>
 </div>
 <div>
-<input type="checkbox" id="Wind" name="Element" value="Wind">
-<label for="Wind">Wind</label>
+<input type="checkbox" id="Air" name="Element" value="Air">
+<label for="Wind">Air</label>
 </div>
 <div>
-<input type="checkbox" id="earth" name="Element" value="Earth">
+<input type="checkbox" id="Earth" name="Element" value="Earth">
 <label for="Earth">Earth</label>
 </div>
 <div>
-<input type="checkbox" id="Nature" name="Element" value="Nature">
-<label for="Nature">Nature</label>
+<input type="checkbox" id="Dark" name="Element" value="Dark">
+<label for="Dark">Dark</label>
+</div>
+<div>
+<input type="checkbox" id="Light" name="Element" value="Light">
+<label for="Light">Light</label>
 </div>
 </div>
 <hr>
@@ -153,102 +159,7 @@
    <button class="bg-black py-2 px-4 text-white rounded-xl cursor-pointer hover:scale-105 transition-all duration-500 md:py-4 md:px-8 ">Search</button>
 </div>
 </div>
-<div class="Market-cards grid grid-cols-2 mt-4 gap-4 md:grid-cols-3 lg:grid-cols-4">
-      <div class="Card relative w-64 h-96 bg-gray-200 rounded-lg flex-shrink-0 mx-2 flex flex-col justify-end items-center gap-4 border-6 border-amber-300 bg-[url('Monsters-img/dragon.png')] bg-center bg-cover p-2 shadow-md">
-          <h3 class="text-white font-bold text-3xl">Dragon</h3>
-          <div class="card-description w-full h-1/3 bg-gray-200 opacity-90 border-2 border-amber-300 justify-around rounded-2xl"></div>
-          <div class="absolute top-0 right-0 w-1/3 h-6 bg-black flex justify-center items-center">
-            <p class="text-white">HP150</p>
-          </div>
-          <img src="Element-img/Dark.png" alt="Element" class="absolute top-2 left-2 w-8 h-8">
-      </div>
-      <div class="Card relative w-64 h-96 bg-gray-200 rounded-lg flex-shrink-0 mx-2 flex flex-col justify-end items-center gap-4 border-6 border-amber-300 bg-[url('Monsters-img/dragon.png')] bg-center bg-cover p-2 shadow-md">
-          <h3 class="text-white font-bold text-3xl">Dragon</h3>
-          <div class="card-description w-full h-1/3 bg-gray-200 opacity-90 border-2 border-amber-300 justify-around rounded-2xl"></div>
-          <div class="absolute top-0 right-0 w-1/3 h-6 bg-black flex justify-center items-center">
-            <p class="text-white">HP150</p>
-          </div>
-          <img src="Element-img/Dark.png" alt="Element" class="absolute top-2 left-2 w-8 h-8">
-      </div>
-      <div class="Card relative w-64 h-96 bg-gray-200 rounded-lg flex-shrink-0 mx-2 flex flex-col justify-end items-center gap-4 border-6 border-amber-300 bg-[url('Monsters-img/dragon.png')] bg-center bg-cover p-2 shadow-md">
-          <h3 class="text-white font-bold text-3xl">Dragon</h3>
-          <div class="card-description w-full h-1/3 bg-gray-200 opacity-90 border-2 border-amber-300 justify-around rounded-2xl"></div>
-          <div class="absolute top-0 right-0 w-1/3 h-6 bg-black flex justify-center items-center">
-            <p class="text-white">HP150</p>
-          </div>
-          <img src="Element-img/Dark.png" alt="Element" class="absolute top-2 left-2 w-8 h-8">
-      </div>
-      <div class="Card relative w-64 h-96 bg-gray-200 rounded-lg flex-shrink-0 mx-2 flex flex-col justify-end items-center gap-4 border-6 border-amber-300 bg-[url('Monsters-img/dragon.png')] bg-center bg-cover p-2 shadow-md">
-          <h3 class="text-white font-bold text-3xl">Dragon</h3>
-          <div class="card-description w-full h-1/3 bg-gray-200 opacity-90 border-2 border-amber-300 justify-around rounded-2xl"></div>
-          <div class="absolute top-0 right-0 w-1/3 h-6 bg-black flex justify-center items-center">
-            <p class="text-white">HP150</p>
-          </div>
-          <img src="Element-img/Dark.png" alt="Element" class="absolute top-2 left-2 w-8 h-8">
-      </div>
-      <div class="Card relative w-64 h-96 bg-gray-200 rounded-lg flex-shrink-0 mx-2 flex flex-col justify-end items-center gap-4 border-6 border-amber-300 bg-[url('Monsters-img/dragon.png')] bg-center bg-cover p-2 shadow-md">
-          <h3 class="text-white font-bold text-3xl">Dragon</h3>
-          <div class="card-description w-full h-1/3 bg-gray-200 opacity-90 border-2 border-amber-300 justify-around rounded-2xl"></div>
-          <div class="absolute top-0 right-0 w-1/3 h-6 bg-black flex justify-center items-center">
-            <p class="text-white">HP150</p>
-          </div>
-          <img src="Element-img/Dark.png" alt="Element" class="absolute top-2 left-2 w-8 h-8">
-      </div>
-      <div class="Card relative w-64 h-96 bg-gray-200 rounded-lg flex-shrink-0 mx-2 flex flex-col justify-end items-center gap-4 border-6 border-amber-300 bg-[url('Monsters-img/dragon.png')] bg-center bg-cover p-2 shadow-md">
-          <h3 class="text-white font-bold text-3xl">Dragon</h3>
-          <div class="card-description w-full h-1/3 bg-gray-200 opacity-90 border-2 border-amber-300 justify-around rounded-2xl"></div>
-          <div class="absolute top-0 right-0 w-1/3 h-6 bg-black flex justify-center items-center">
-            <p class="text-white">HP150</p>
-          </div>
-          <img src="Element-img/Dark.png" alt="Element" class="absolute top-2 left-2 w-8 h-8">
-      </div>
-      <div class="Card relative w-64 h-96 bg-gray-200 rounded-lg flex-shrink-0 mx-2 flex flex-col justify-end items-center gap-4 border-6 border-amber-300 bg-[url('Monsters-img/dragon.png')] bg-center bg-cover p-2 shadow-md">
-          <h3 class="text-white font-bold text-3xl">Dragon</h3>
-          <div class="card-description w-full h-1/3 bg-gray-200 opacity-90 border-2 border-amber-300 justify-around rounded-2xl"></div>
-          <div class="absolute top-0 right-0 w-1/3 h-6 bg-black flex justify-center items-center">
-            <p class="text-white">HP150</p>
-          </div>
-          <img src="Element-img/Dark.png" alt="Element" class="absolute top-2 left-2 w-8 h-8">
-      </div>
-      <div class="Card relative w-64 h-96 bg-gray-200 rounded-lg flex-shrink-0 mx-2 flex flex-col justify-end items-center gap-4 border-6 border-amber-300 bg-[url('Monsters-img/dragon.png')] bg-center bg-cover p-2 shadow-md">
-          <h3 class="text-white font-bold text-3xl">Dragon</h3>
-          <div class="card-description w-full h-1/3 bg-gray-200 opacity-90 border-2 border-amber-300 justify-around rounded-2xl"></div>
-          <div class="absolute top-0 right-0 w-1/3 h-6 bg-black flex justify-center items-center">
-            <p class="text-white">HP150</p>
-          </div>
-          <img src="Element-img/Dark.png" alt="Element" class="absolute top-2 left-2 w-8 h-8">
-      </div><div class="Card relative w-64 h-96 bg-gray-200 rounded-lg flex-shrink-0 mx-2 flex flex-col justify-end items-center gap-4 border-6 border-amber-300 bg-[url('Monsters-img/dragon.png')] bg-center bg-cover p-2 shadow-md">
-          <h3 class="text-white font-bold text-3xl">Dragon</h3>
-          <div class="card-description w-full h-1/3 bg-gray-200 opacity-90 border-2 border-amber-300 justify-around rounded-2xl"></div>
-          <div class="absolute top-0 right-0 w-1/3 h-6 bg-black flex justify-center items-center">
-            <p class="text-white">HP150</p>
-          </div>
-          <img src="Element-img/Dark.png" alt="Element" class="absolute top-2 left-2 w-8 h-8">
-      </div><div class="Card relative w-64 h-96 bg-gray-200 rounded-lg flex-shrink-0 mx-2 flex flex-col justify-end items-center gap-4 border-6 border-amber-300 bg-[url('Monsters-img/dragon.png')] bg-center bg-cover p-2 shadow-md">
-          <h3 class="text-white font-bold text-3xl">Dragon</h3>
-          <div class="card-description w-full h-1/3 bg-gray-200 opacity-90 border-2 border-amber-300 justify-around rounded-2xl"></div>
-          <div class="absolute top-0 right-0 w-1/3 h-6 bg-black flex justify-center items-center">
-            <p class="text-white">HP150</p>
-          </div>
-          <img src="Element-img/Dark.png" alt="Element" class="absolute top-2 left-2 w-8 h-8">
-      </div><div class="Card relative w-64 h-96 bg-gray-200 rounded-lg flex-shrink-0 mx-2 flex flex-col justify-end items-center gap-4 border-6 border-amber-300 bg-[url('Monsters-img/dragon.png')] bg-center bg-cover p-2 shadow-md">
-          <h3 class="text-white font-bold text-3xl">Dragon</h3>
-          <div class="card-description w-full h-1/3 bg-gray-200 opacity-90 border-2 border-amber-300 justify-around rounded-2xl"></div>
-          <div class="absolute top-0 right-0 w-1/3 h-6 bg-black flex justify-center items-center">
-            <p class="text-white">HP150</p>
-          </div>
-          <img src="Element-img/Dark.png" alt="Element" class="absolute top-2 left-2 w-8 h-8">
-      </div>
-      <div class="Card relative w-64 h-96 bg-gray-200 rounded-lg flex-shrink-0 mx-2 flex flex-col justify-end items-center gap-4 border-6 border-amber-300 bg-[url('Monsters-img/dragon.png')] bg-center bg-cover p-2 shadow-md">
-          <h3 class="text-white font-bold text-3xl">Dragon</h3>
-          <div class="card-description w-full h-1/3 bg-gray-200 opacity-90 border-2 border-amber-300 justify-around rounded-2xl"></div>
-          <div class="absolute top-0 right-0 w-1/3 h-6 bg-black flex justify-center items-center">
-            <p class="text-white">HP150</p>
-          </div>
-          <img src="Element-img/Dark.png" alt="Element" class="absolute top-2 left-2 w-8 h-8">
-      </div>
-    
-</div>
+<div class="Market-cards grid grid-cols-2 mt-4 gap-4 md:grid-cols-3 lg:grid-cols-4"></div>
 </section>
 </section>
    <footer class="flex flex-col w-full h-16 bg-black">
