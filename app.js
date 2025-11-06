@@ -2,7 +2,6 @@ const header = document.querySelector("header");
 const showButtons = document.querySelectorAll('.show-question');
 const resetbtn = document.querySelector(".reset");
 const applyFilterBtn = document.querySelector(".Apply-filter")
-
 //rarity
 const rarity = document.querySelectorAll('[name="Rarity"]');
 const Commun =document.getElementById('Commun');
@@ -18,23 +17,28 @@ const earth= document.getElementById('Earth');
 const air= document.getElementById('Air');
 const light= document.getElementById('Light');
 const dark= document.getElementById('Dark');
-
+//containers
 const MarketContainer= document.querySelector('.Market-cards');
 const FavouriteContainer=document.querySelector('.Favourite-container');
-
+const CollectionContainer=document.querySelector('.collection-container');
+const CartContainer=document.querySelector('.Cart-container');
+//colors for rarity border
 const colors = {
-	  'Commun': '#A0A0A0',
+	  'Common': '#373636ff',
 	  'Rare': '#0000FF',
 	  'Epic': '#800080',
 	  'Legendary': '#FFA500',
 	  'Mythic': '#FF0000'
 };
+//global variables
 let Favourites=[];
 let Collections=[];
 let allMonsters=[];
-let monsterLentgh;
+let Cart=[];
+let monsterLength;
 
 localStorage.clear();
+
 //fetching data from json file
 fetch('Monsters.json')
 .then(response => response.json())
@@ -69,14 +73,38 @@ cardDetailles.classList.toggle('hidden');
 cardDetailles.classList.toggle('hidden');
 }
 
-if(e.target.classList.contains('Favourite-btn')){
-e.target.classList.toggle('fav');
-showfavourites();
-}else if(e.target.classList.contains('Shop-btn')){
-Collections=Collections.push();
-localStorage.setItem('Collection',Collections);
+const favBtn = e.target.closest('.Favourite-btn');
+if (favBtn) {
+const monsterId = favBtn.dataset.monsterId;
+addToFavourites(monsterId);
+return;
 }
-})
+
+const shopBtn = e.target.closest('.shop-btn');
+if (shopBtn) {
+const monsterId = shopBtn.dataset.monsterId;
+addToCart(monsterId);
+return;
+}
+});
+
+function addToFavourites(monsterId){
+if(Favourites.includes(monsterId)){
+Favourites = Favourites.filter(id => id !== monsterId);
+}else{
+Favourites.push(monsterId);
+}
+localStorage.setItem('Favourites', JSON.stringify(Favourites));
+}
+
+function addToCart(monsterId){
+if(Cart.includes(monsterId)){
+Cart = Cart.filter(id => id !== monsterId);
+}else{
+Cart.push(monsterId);
+}
+localStorage.setItem('Cart', JSON.stringify(Cart));
+}
 
 function showfavourites(){
 let monsterfav = [...allMonsters];
@@ -172,7 +200,7 @@ CardContainer.innerHTML = `
 <p class="w-fit text-amber-300 bg-black p-1 px-2 rounded-2xl text-xs">${cardObject.rarity}</p>
 <div class="flex justify-between items-center">
 <p class="font-bold text-sm sm:text-base">$${cardObject.price}</p> <div class="flex gap-2">
-<button class="Favourite-btn bag-gold px-2 py-1 rounded-2xl cursor-pointer hover:scale-110 transition-all" data-monster-id="${monsterId}" style="${isFavourite ? 'background-color: #FF6B6B; color: white;' : ''}">
+<button class="Favourite-btn bag-gold px-2 py-1 rounded-2xl cursor-pointer hover:scale-110 transition-all" data-monster-id="${monsterId}" style="${isFavourite ? 'background-color: #FF6B6B; color: black;' : ''}">
 <i class="fi ${isFavourite ? 'fi-sr-heart' : 'fi-rr-heart'} text-sm sm:text-base"></i><span class="sr-only">Add to favourites</span>
 </button>
 <button class="shop-btn bag-gold px-2 py-1 rounded-2xl cursor-pointer hover:scale-110 transition-transform" data-monster-id="${monsterId}">
