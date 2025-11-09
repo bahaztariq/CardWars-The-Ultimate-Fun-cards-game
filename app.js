@@ -38,8 +38,6 @@ const cartTotalPrice = document.getElementById('cart-total-price');
 const openCartBtns = document.querySelectorAll('.fi-rs-shopping-cart');
 const checkoutBtn = document.getElementById('checkout'); 
 
-const paginationContainer = document.getElementById('pagination-container');
-
 const colors = {
 	  'Common': '#373636ff',
 	  'Rare': '#0000FF',
@@ -54,8 +52,6 @@ let Collections = JSON.parse(localStorage.getItem('Collections')) || [];
 let Cart = JSON.parse(localStorage.getItem('Cart')) || [];
 let monsterLength;
 
-let currentPage = 1;
-let cardsPerPage = 8; 
 let currentMonsterList = [];
 
 if (slider && prevBtn && nextBtn) {
@@ -82,7 +78,7 @@ fetch('Monsters.json')
     allMonsters = data;
     currentMonsterList = [...allMonsters]; 
     
-    renderPage();
+    renderCards();
     
     showfavourites();
     displayCollections(); 
@@ -118,7 +114,7 @@ document.addEventListener('click', function(e){
         addToFavourites(monsterId);
         showfavourites();
         
-        renderPage();
+        renderCards();
         return;
     }
 
@@ -378,10 +374,6 @@ function CreateCollectionCard(cardObject, quantity, container) {
     CardContainer.classList.add('Card-Container', 'bg-gray-300', 'rounded-lg', 'p-2', 'w-full');
     CardContainer.innerHTML = `
 <div class="Card relative w-full aspect-[2/3] bg-gray-200 rounded-lg flex flex-col justify-end items-center gap-2 bg-center bg-cover p-2 shadow-md sm:gap-3 md:gap-4" style="border: 5px solid ${colors[cardObject.rarity]}; background-image: url('Monsters-img/${cardObject.image}');">
-    
-    <div class="absolute top-2 right-2 w-10 h-10 bg-blue-600 text-white flex items-center justify-center rounded-full font-bold text-lg border-2 border-white">
-      x${quantity}
-    </div>
 
     <h3 class="text-white font-bold text-xl sm:text-2xl md:text-3xl drop-shadow-lg">${cardObject.name}</h3>
     <div class="card-description flex justify-around items-center w-full min-h-1/3 bg-gray-200 opacity-90 border-2 border-amber-300 p-1 rounded-xl sm:p-2 sm:rounded-2xl">
@@ -392,7 +384,10 @@ function CreateCollectionCard(cardObject, quantity, container) {
     <div class="absolute top-0 right-0 w-1/3 h-5 bg-black flex justify-center items-center sm:h-6"><p class="text-white text-xs sm:text-sm">HP${cardObject.hp}</p></div>
     <img src="Element-img/${cardObject.element}.png" alt="Element" class="absolute top-2 left-2 w-6 h-6 sm:w-8 sm:h-8">
 </div>
-<div class="card-infos flex flex-col w-full p-2 gap-1">
+<div class=" relative card-infos flex flex-col w-full p-2 gap-1">
+    <div class="absolute top-2 right-2 w-10 h-10 bag-gold text-black flex items-center justify-center rounded-full font-bold text-lg border-2 border-black">
+      x${quantity}
+    </div>
     <p class="font-semibold text-sm sm:text-base">${cardObject.name}</p>
     <p class="w-fit text-amber-300 bg-black p-1 px-2 rounded-2xl text-xs">${cardObject.rarity}</p>
     <p class="font-bold text-sm sm:text-base">Value: $${(cardObject.price * quantity).toFixed(2)}</p>
@@ -411,8 +406,7 @@ if (resetbtn) {
         });
         
         currentMonsterList = [...allMonsters];
-        currentPage = 1;
-        renderPage();
+        renderCards();
     });
 }
 
@@ -421,8 +415,7 @@ if (applyFilterBtn) {
     applyFilterBtn.addEventListener('click', () => {
         const filtered = filterMonsters();
         currentMonsterList = filtered;
-        currentPage = 1;
-        renderPage();
+        renderCards();
 	});
 }
 
@@ -453,90 +446,18 @@ function filterMonsters() {
     return filtered;
 }
 
-function renderPage() {
-    displayPaginatedCards(currentMonsterList);
-    setupPagination(currentMonsterList);
-}
-
-function displayPaginatedCards(monstersArray) {
+function renderCards() {
     if (!MarketContainer) return; 
 
     MarketContainer.innerHTML = '';
-    
-    const startIndex = (currentPage - 1) * cardsPerPage;
-    const endIndex = startIndex + cardsPerPage;
-    const paginatedItems = monstersArray.slice(startIndex, endIndex);
 
-    if (monstersArray.length === 0) {
+    if (currentMonsterList.length === 0) {
         MarketContainer.innerHTML = '<p class="text-black text-xl">No monsters found matching your filters.</p>';
         return;
     }
 
-    paginatedItems.forEach((monster) => {
+    currentMonsterList.forEach((monster) => {
         CreateCard(monster, MarketContainer);
-    });
-}
-
-function setupPagination(monstersArray) {
-    if (!paginationContainer) return;
-    paginationContainer.innerHTML = '';
-    
-    const totalCards = monstersArray.length;
-    const totalPages = Math.ceil(totalCards / cardsPerPage);
-    
-    if (totalPages <= 1) return; 
-
-    paginationContainer.appendChild(createPaginationButton('Prev', currentPage > 1));
-
-    for (let i = 1; i <= totalPages; i++) {
-        paginationContainer.appendChild(createPaginationButton(i, true, i === currentPage));
-    }
-
-    paginationContainer.appendChild(createPaginationButton('Next', currentPage < totalPages));
-}
-
-function createPaginationButton(text, enabled, isActive = false) {
-    const button = document.createElement('button');
-    button.innerText = text;
-    button.dataset.page = text;
-    
-    button.className = 'px-4 py-2 rounded border border-gray-300';
-    
-    if (isActive) {
-        button.classList.add('bg-black', 'text-amber-300', 'font-bold');
-    } else {
-        button.classList.add('bg-white', 'text-black');
-    }
-    
-    if (!enabled) {
-        button.disabled = true;
-        button.classList.add('opacity-50', 'cursor-not-allowed');
-    } else {
-        button.classList.add('cursor-pointer', 'hover:bg-gray-100');
-    }
-    
-    return button;
-}
-
-if (paginationContainer) {
-    paginationContainer.addEventListener('click', (e) => {
-        const target = e.target.closest('button');
-        if (!target) return;
-        
-        const pageText = target.dataset.page;
-        
-        if (pageText === 'Prev') {
-            if (currentPage > 1) currentPage--;
-        } else if (pageText === 'Next') {
-            const totalPages = Math.ceil(currentMonsterList.length / cardsPerPage);
-            if (currentPage < totalPages) currentPage++;
-        } else {
-            currentPage = parseInt(pageText);
-        }
-        
-        renderPage();
-        
-        window.scrollTo(0, MarketContainer.offsetTop);
     });
 }
 
