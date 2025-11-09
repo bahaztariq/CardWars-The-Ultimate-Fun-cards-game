@@ -78,7 +78,7 @@ fetch('Monsters.json')
     allMonsters = data;
     currentMonsterList = [...allMonsters]; 
     
-    renderCards();
+    displayallcards();
     
     showfavourites();
     displayCollections(); 
@@ -114,7 +114,7 @@ document.addEventListener('click', function(e){
         addToFavourites(monsterId);
         showfavourites();
         
-        renderCards();
+        displayallcards();
         return;
     }
 
@@ -406,7 +406,7 @@ if (resetbtn) {
         });
         
         currentMonsterList = [...allMonsters];
-        renderCards();
+        displayallcards();
     });
 }
 
@@ -415,7 +415,7 @@ if (applyFilterBtn) {
     applyFilterBtn.addEventListener('click', () => {
         const filtered = filterMonsters();
         currentMonsterList = filtered;
-        renderCards();
+        displayallcards();
 	});
 }
 
@@ -446,7 +446,7 @@ function filterMonsters() {
     return filtered;
 }
 
-function renderCards() {
+function displayallcards() {
     if (!MarketContainer) return; 
 
     MarketContainer.innerHTML = '';
