@@ -41,10 +41,13 @@
       </button>
     </div>
   </header>
-  <section class="Arena w-full h-screen bg-blue-950 flex">
-    <aside class="cards w-1/4 bg-white flex-col items-center justify-start p-4 hidden md:flex">
-        <h1 class="text-4xl text-black font-bold">Arena</h1>
+  <section class="Arena-container w-full h-screen bg-blue-950 flex">
+    <aside class="cards w-1/5 bg-white flex-col items-center justify-start gap-4 p-4 hidden  md:flex" ondrop="dropHandler(event)" ondragover="dragoverHandler(event)">
+        <h1 id="card1" class="text-4xl text-black font-bold" draggable="true" ondragstart="dragstartHandler(event)">Arena</h1>
+        <button class="draw-card-btn w-full h-10 border bg-black text-amber-300 rounded cursor-pointer transition-all duration-500 hover:scale-95 active:scale-90">draw card</button>
+        <p class="text-2xl text-black font-bold self-start">Collection (<span class="collection-quantity"></span>)</p>
     </aside>
+    <div id="arena" ondrop="dropHandler(event)" ondragover="dragoverHandler(event)" class="w-1/5 bg-yellow"></div>
   </section>
   <footer class="flex flex-col w-full h-16 bg-black">
         <div class="bag-gold w-full  flex  flex-col justify-center items-center px-8 py-6 gap-4 md:justify-between md:flex-row md:px-24">

@@ -499,3 +499,37 @@ function CreateCard(cardObject, container) {
 `;
     container.appendChild(CardContainer);
 }
+
+// drag and drop handlers
+function dragstartHandler(ev) {
+  ev.dataTransfer.setData("text", ev.target.id);
+}
+
+function dragoverHandler(ev) {
+  ev.preventDefault();
+}
+
+function dropHandler(ev) {
+  ev.preventDefault();
+  const data = ev.dataTransfer.getData("text");
+  ev.target.appendChild(document.getElementById(data));
+}
+
+const collectionNumber = document.querySelector('.collection-quantity');
+const startbtn = document.querySelector('.start-btn');
+const drawbtn = document.querySelector('.draw-card-btn');
+const startgame = document.querySelector('.start-game');
+const endTour = document.querySelector('.end-tour');
+
+function calculatecollection(){
+    let cardnumber = 0;
+    Collections.forEach((card) =>{
+        cardnumber += card.quantity;
+    })
+    return cardnumber;
+}
+if(collectionNumber) collectionNumber.textContent = calculatecollection();
+
+function startGame(){
+
+}
