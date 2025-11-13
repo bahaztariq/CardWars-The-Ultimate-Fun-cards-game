@@ -26,3 +26,17 @@ body {
     --webkit-scrollbar: none;
     scroll-behavior: smooth;
 }
+
+button:disabled{
+    opacity: 0.7;
+    cursor: not-allowed;
+    background-color: gray;
+}
+.ArenaCollection{
+    scrollbar-width: none;
+    --webkit-scrollbar: none;
+    scroll-behavior: smooth;
+}
+.DefenceClass{
+    transform: rotateZ(90deg);
+}

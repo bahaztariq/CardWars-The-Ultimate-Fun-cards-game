@@ -500,36 +500,192 @@ function CreateCard(cardObject, container) {
     container.appendChild(CardContainer);
 }
 
-// drag and drop handlers
-function dragstartHandler(ev) {
-  ev.dataTransfer.setData("text", ev.target.id);
-}
 
-function dragoverHandler(ev) {
-  ev.preventDefault();
+function dragstartHandler(event) {
+  event.dataTransfer.setData("text" ,event.target.id);
 }
-
-function dropHandler(ev) {
-  ev.preventDefault();
-  const data = ev.dataTransfer.getData("text");
-  ev.target.appendChild(document.getElementById(data));
+function dragleaveHandler(event) {
+  event.target.style.border = "";
 }
+function dragoverHandler(event) {
+  event.preventDefault();
+  event.target.style.border = "2px dotted green";
+}
+  
+function dropHandler(event) {
+  event.preventDefault();
+  event.target.style.border = "";
+  const data = event.dataTransfer.getData("text");
+  event.target.appendChild(document.getElementById(data));
+  
+  if(event.target.classList.contains('card-player-container')){
+     modemodal.classList.remove('hidden');
+     Defencemode.onclick = (e)=>{
+          modemodal.classList.add('hidden');
+          document.getElementById(data).classList.add('DefenceClass');
+          document.getElementById(data).classList.remove('AttackClass');
+    }
+    Attackmode.onclick=(e)=>{
+          modemodal.classList.add('hidden');
+          document.getElementById(data).classList.add('AttackClass');
+          document.getElementById(data).classList.remove('DefenceClass');
+    }
 
+  }
+  
+}
+const modemodal=document.querySelector('.mode-modal');
+const Attackmode =document.querySelector('.Attack-mode');
+const Defencemode =document.querySelector('.Defence-mode');
 const collectionNumber = document.querySelector('.collection-quantity');
-const startbtn = document.querySelector('.start-btn');
 const drawbtn = document.querySelector('.draw-card-btn');
-const startgame = document.querySelector('.start-game');
+const startgame = document.querySelector('.start-game-btn');
 const endTour = document.querySelector('.end-tour');
+const Arenacontainer = document.querySelector('.Arena-container');
+const ArenaCollection =document.querySelector('.ArenaCollection')
+const computercards = document.querySelectorAll('.card-computer-container');
+const computerCards = document.querySelector('.computer-cards')
+const Playercards = document.querySelector('.Player-cards');
+const Playerhands = document.querySelector('.Player-hands');
+const LifePoints = document.querySelector('.life-points');
+const computerPoints = document.querySelector('.computer-points');
+const WinSound=document.querySelector('.Win-Sound');
+const LoseSound=document.querySelector('.Lose-Sound');
+let playerHp=8000;
+let opponantHP=8000;
+let turn = "Player";
+let Gamestarted=false;
+let arenacards =[];
 
 function calculatecollection(){
     let cardnumber = 0;
-    Collections.forEach((card) =>{
+    arenacards.forEach((card) =>{
         cardnumber += card.quantity;
     })
     return cardnumber;
 }
-if(collectionNumber) collectionNumber.textContent = calculatecollection();
+function swapturn(){
+  turn = (turn === "Player") ? "Computer" : "Player";
+}
+function StartGame(){
+    if(!Gamestarted){
+        arenacards = [...Collections];
+        collectionNumber.textContent = calculatecollection();
+        if(arenacards.length === 0){
+        Playerhands.innerHTML=`<p>there is no cards in your collection, acceder to market to buy cards</p>`;
+        return;
+        }
+            LifePoints.textContent=playerHp;
+            computerPoints.textContent=opponantHP;
+            Gamestarted=true;
+            startgame.textContent="Game started"
+            startgame.disabled=true;
+            endTour.disabled=false;
+            drawbtn.disabled=false;
+            startgame.style.cursor="not-allowed";
+            startgame.style.opacity="0.7"
+        }else{
+            alert('You already started the game');
+        }
+}
+function DrawCard(){
+    if(arenacards.length === 0){
+        Playerhands.innerHTML=`<p>there is no cards in your collection, acceder to market to buy cards</p>`;
+        return;
+    }
+    if(Playerhands.childElementCount>=5){
+        alert('you reached the maximum cards per hand');
+        return;
+    }
+    let randomIndex = Math.floor(Math.random()*arenacards.length);
+    const selectedCard = arenacards[randomIndex];
+    const monster = allMonsters.find(m => m.id == selectedCard.id);
+      if(monster){
+         arenacards.splice(randomIndex, 1);
+         const CardContainer = document.createElement('div');
+         CardContainer.id = 'arena-card-' + monster.id;
+         CardContainer.draggable=true;
+         CardContainer.addEventListener('dragstart', dragstartHandler);
+         CardContainer.classList.add('Card-Container','max-w-36', 'bg-gray-300', 'rounded-lg', 'p-2', 'w-full','cursor-pointer','overflow-hidden',);
+         CardContainer.innerHTML = `
+         <div class="Card relative w-full aspect-[2/3] bg-gray-200 rounded-lg flex flex-col justify-end items-center gap-2 bg-center bg-cover p-1 shadow-md sm:gap-3 md:gap-4" style="border: 5px solid ${colors[monster.rarity]}; background-image: url('Monsters-img/${monster.image}');">
+            <h3 class="text-white font-bold text-md  drop-shadow-lg">${monster.name}</h3>
+         <div class="card-description flex justify-around items-center w-full min-h-1/3 bg-gray-200 opacity-90 border-2 border-amber-300 p-1 rounded-xl sm:p-2 sm:rounded-2xl">
+           <div class="flex flex-col justify-center items-center gap-1"><img src="img/Power.png" alt="Power" class="w-6 h-6 "><p class="text-xs sm:text-sm">${monster.Power}</p></div>
+           <div class="flex flex-col justify-center items-center gap-1"><img src="img/Defence.png" alt="Defence" class="w-6 h-6 "><p class="text-xs sm:text-sm">${monster.Defence}</p></div>
+           <div class="flex flex-col justify-center items-center gap-1"><img src="img/Speed.png" alt="Speed" class="w-6 h-6 "><p class="text-xs sm:text-sm">${monster.Speed}</p></div>
+         </div>
+         <div class="absolute top-0 right-0 w-1/3 h-5 bg-black flex justify-center items-center sm:h-6"><p class="text-white text-xs sm:text-sm">HP${monster.hp}</p></div>
+         <img src="Element-img/${monster.element}.png" alt="Element" class="absolute top-2 left-2 w-5 h-5">
+         </div>`;
+         Playerhands.appendChild(CardContainer);
+      }
+      drawbtn.disabled=true;
+      collectionNumber.textContent = calculatecollection();
+      checkwin();
+}
 
-function startGame(){
 
+function checkwin(){
+    if(playerHp<=0 && opponantHP>0){
+        LoseSound.play();
+        return;
+    }
+    if(opponantHP<=0 && playerHp>0){
+        WinSound.play();
+        return;
+    }
+}
+
+function computerturn(){
+    const computerSlots = document.querySelectorAll('.computer-cards .card-computer-container');
+
+    let emptySlot = null;
+    for(let slot of computerSlots){
+        if(slot.childElementCount === 0){
+            emptySlot = slot;
+            break;
+        }
+    }
+    
+    if(!emptySlot){
+        let randomSlotIndex = Math.floor(Math.random() * 5); 
+        computerSlots[randomSlotIndex].innerHTML = '';
+        emptySlot = computerSlots[randomSlotIndex];
+    }
+    let randomMode = Math.floor(Math.random()*2)+1;
+    console.log(randomMode);
+   
+    let randomIndex = Math.floor(Math.random() * allMonsters.length);
+    const monster = allMonsters[randomIndex];
+    
+    if(monster && emptySlot){
+        const CardContainer = document.createElement('div');
+        CardContainer.classList.add('Card-Container','max-w-36', 'bg-gray-300', 'rounded-lg', 'p-2', 'w-full','cursor-pointer','overflow-hidden');
+        if(randomMode===2){
+            CardContainer.classList.add('DefenceClass');
+        }else{
+            CardContainer.classList.add('AttackClass');
+        }
+        CardContainer.innerHTML = `
+        <div class="Card relative w-full aspect-[2/3] bg-gray-200 rounded-lg flex flex-col justify-end items-center gap-2 bg-center bg-cover p-1 shadow-md sm:gap-3 md:gap-4" style="border: 5px solid ${colors[monster.rarity]}; background-image: url('Monsters-img/${monster.image}');">
+           <h3 class="text-white font-bold text-md drop-shadow-lg">${monster.name}</h3>
+        <div class="card-description flex justify-around items-center w-full min-h-1/3 bg-gray-200 opacity-90 border-2 border-amber-300 p-1 rounded-xl sm:p-2 sm:rounded-2xl">
+          <div class="flex flex-col justify-center items-center gap-1"><img src="img/Power.png" alt="Power" class="w-6 h-6"><p class="text-xs sm:text-sm">${monster.Power}</p></div>
+          <div class="flex flex-col justify-center items-center gap-1"><img src="img/Defence.png" alt="Defence" class="w-6 h-6"><p class="text-xs sm:text-sm">${monster.Defence}</p></div>
+          <div class="flex flex-col justify-center items-center gap-1"><img src="img/Speed.png" alt="Speed" class="w-6 h-6"><p class="text-xs sm:text-sm">${monster.Speed}</p></div>
+        </div>
+        <div class="absolute top-0 right-0 w-1/3 h-5 bg-black flex justify-center items-center sm:h-6"><p class="text-white text-xs sm:text-sm">HP${monster.hp}</p></div>
+        <img src="Element-img/${monster.element}.png" alt="Element" class="absolute top-2 left-2 w-5 h-5">
+        </div>`;
+        emptySlot.appendChild(CardContainer); 
+        
+        console.log(`Computer played ${monster.name}`);
+    }
+    drawbtn.disabled=false;
+    checkwin();
+}
+
+function Attackoponant(){
+    
 }
