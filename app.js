@@ -691,15 +691,16 @@ function computerturn(){
     drawbtn.disabled=false;
     checkwin();
 }
+if(Playercards){
   Playercards.addEventListener('click', (e) => {
     const btn = e.target.closest('.Attackbtn');
     const attackpoints = parseInt(btn.getAttribute('data-monster-power'), 10);
     opponantHP -= attackpoints;
     if (computerPoints) computerPoints.textContent = opponantHP;
     checkwin();
-    // btn.classList.add('hidden');
+    btn.classList.add('hidden');
   });
-
+}
   function computerattack(attackpoints){
     playerHp-=attackpoints;
     if (LifePoints) LifePoints.textContent = playerHp;
