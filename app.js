@@ -529,8 +529,8 @@ function dropHandler(event) {
           modemodal.classList.add('hidden');
           document.getElementById(data).classList.add('AttackClass');
           document.getElementById(data).classList.remove('DefenceClass');
+          document.getElementById(data).querySelector('.Attackbtn').classList.remove('hidden');
     }
-
   }
   
 }
@@ -549,6 +549,8 @@ const Playercards = document.querySelector('.Player-cards');
 const Playerhands = document.querySelector('.Player-hands');
 const LifePoints = document.querySelector('.life-points');
 const computerPoints = document.querySelector('.computer-points');
+const victoryimg=document.querySelector('.victory-img');
+const defeatimg=document.querySelector('.defeat-img');
 const WinSound=document.querySelector('.Win-Sound');
 const LoseSound=document.querySelector('.Lose-Sound');
 let playerHp=8000;
@@ -615,6 +617,7 @@ function DrawCard(){
            <div class="flex flex-col justify-center items-center gap-1"><img src="img/Defence.png" alt="Defence" class="w-6 h-6 "><p class="text-xs sm:text-sm">${monster.Defence}</p></div>
            <div class="flex flex-col justify-center items-center gap-1"><img src="img/Speed.png" alt="Speed" class="w-6 h-6 "><p class="text-xs sm:text-sm">${monster.Speed}</p></div>
          </div>
+         <button class="Attackbtn absolute top-full left-1/2 -translate-1/2 text-sm p-1 bg-red-900 cursor-pointer rounded font-bold text-black hover:opacity-75 active:scale-95 hidden" data-monster-power="${monster.Power*10}">ATTACK</button>
          <div class="absolute top-0 right-0 w-1/3 h-5 bg-black flex justify-center items-center sm:h-6"><p class="text-white text-xs sm:text-sm">HP${monster.hp}</p></div>
          <img src="Element-img/${monster.element}.png" alt="Element" class="absolute top-2 left-2 w-5 h-5">
          </div>`;
@@ -629,10 +632,12 @@ function DrawCard(){
 function checkwin(){
     if(playerHp<=0 && opponantHP>0){
         LoseSound.play();
+        defeatimg.classList.remove('hidden');
         return;
     }
     if(opponantHP<=0 && playerHp>0){
         WinSound.play();
+        victoryimg.classList.remove('hidden');
         return;
     }
 }
@@ -678,6 +683,7 @@ function computerturn(){
         <div class="absolute top-0 right-0 w-1/3 h-5 bg-black flex justify-center items-center sm:h-6"><p class="text-white text-xs sm:text-sm">HP${monster.hp}</p></div>
         <img src="Element-img/${monster.element}.png" alt="Element" class="absolute top-2 left-2 w-5 h-5">
         </div>`;
+        computerattack(monster.Power*10);
         emptySlot.appendChild(CardContainer); 
         
         console.log(`Computer played ${monster.name}`);
@@ -685,7 +691,17 @@ function computerturn(){
     drawbtn.disabled=false;
     checkwin();
 }
+  Playercards.addEventListener('click', (e) => {
+    const btn = e.target.closest('.Attackbtn');
+    const attackpoints = parseInt(btn.getAttribute('data-monster-power'), 10);
+    opponantHP -= attackpoints;
+    if (computerPoints) computerPoints.textContent = opponantHP;
+    checkwin();
+    // btn.classList.add('hidden');
+  });
 
-function Attackoponant(){
-    
-}
+  function computerattack(attackpoints){
+    playerHp-=attackpoints;
+    if (LifePoints) LifePoints.textContent = playerHp;
+    checkwin();
+  }
